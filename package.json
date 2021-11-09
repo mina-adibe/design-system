@@ -1,7 +1,7 @@
 {
-  "name": "mui5-storybook-typescript",
+  "name": "@easyrent-nz/components",
   "version": "0.4.0",
-  "description": "Project template for quickly building a React component library with Storybook.js & TypeScript.",
+  "description": "Design system with reusable react components",
   "license": "MIT",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
