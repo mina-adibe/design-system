@@ -56,7 +56,8 @@
     "build": "rollup -c && node scripts/copy-pkg.js",
     "deploy-storybook": "storybook-to-ghpages",
     "clean": "rm -rf node_modules && yarn",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx --fix"
   },
   "dependencies": {
     "@storybook/addon-actions": "^6.3.6",
