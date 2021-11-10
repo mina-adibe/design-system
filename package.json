@@ -10,9 +10,12 @@
     "type": "git",
     "url": "git+https://github.com/alexn400/mui-storybook.git"
   },
-  "author": "Alexander Nicholson",
+  "author": "EasyRent",
   "devDependencies": {
     "@babel/core": "^7.15.0",
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "@mui/material": "^5.0.6",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
     "@storybook/addon-actions": "^6.3.6",
@@ -30,10 +33,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.0",
     "rollup-plugin-typescript2": "^0.30.0",
-    "typescript": "^4.3.5",
-    "@emotion/react": "^11.5.0",
-    "@emotion/styled": "^11.3.0",
-    "@mui/material": "^5.0.6"
+    "typescript": "^4.3.5"
   },
   "peerDependencies": {
     "@emotion/react": "^11.5.0",
@@ -44,7 +44,7 @@
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "build-storybook": "build-storybook && echo design.easyrent.nz > storybook-static/CNAME",
     "build": "rollup -c && cp package.json lib",
     "deploy-storybook": "storybook-to-ghpages",
     "clean": "rm -rf node_modules && yarn"
