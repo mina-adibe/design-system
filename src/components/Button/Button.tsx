@@ -1,13 +1,14 @@
-import React from 'react';
-import {Button as MuiButton} from '@mui/material'
+import { Button as MuiButton } from '@mui/material';
+import { FC } from 'react';
+
 export interface ButtonProps {
-    text: string;
+  text: string;
 }
 
-const Button: React.FC<ButtonProps> = ({text}) => {
-    return (
-        <MuiButton variant='contained' color='primary'>{text}</MuiButton>
-    )
-}
+const Button: FC<ButtonProps> = ({ text }) => (
+  <MuiButton variant='contained' color='primary'>
+    {text}
+  </MuiButton>
+);
 
 export default Button;
