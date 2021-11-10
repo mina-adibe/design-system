@@ -18,18 +18,20 @@ const sh = (e: number, v: number) => {
   const cb = Math.floor(e * b(v));
   const ci = i(v);
 
-  return [cx, cy, cb, ci].map((v) => `${v}px`).join(' ');
+  return [cx, cy, cb, ci].map((p) => `${p}px`).join(' ');
 };
 
 export const createShadow = (e: number) => {
-  return [sh(e, 1), sh(e, 2), sh(e, 3)].map((v, i) => `${v} ${color(OPACITY_LAYERS[i])}`).join(',');
+  return [sh(e, 1), sh(e, 2), sh(e, 3)]
+    .map((v, index) => `${v} ${color(OPACITY_LAYERS[index])}`)
+    .join(',');
 };
 
 const generateShadows = () => {
   return [
     'none',
-    ...new Array(24).fill(0).map((_, i) => {
-      return createShadow(i + 1);
+    ...new Array(24).fill(0).map((_, index) => {
+      return createShadow(index + 1);
     }),
   ];
 };

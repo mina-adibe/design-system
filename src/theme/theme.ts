@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { createTheme } from '@mui/material/styles';
 import './font.css';
 import generateShadows from './shadows';
