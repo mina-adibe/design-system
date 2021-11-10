@@ -11,7 +11,6 @@ export default {
 
 const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 
-// Reuse that template for creating different stories
 export const Primary = Template.bind({});
 Primary.args = { text: 'Primary button!' };
 
