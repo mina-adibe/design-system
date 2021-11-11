@@ -113,7 +113,7 @@ const finalTheme = createTheme(theme, {
     MuiOutlinedInput: {
       styleOverrides: {
         input: {
-          padding: '12.75px 14px',
+          padding: '10px 14px',
         },
       },
     },
