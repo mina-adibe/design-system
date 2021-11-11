@@ -16,4 +16,4 @@ jobs:
       - run: yarn
       - run: yarn deploy-storybook --ci --source-branch=main
         env:
-          GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.actor }}:${{ secrets.GH_TOKEN }}
