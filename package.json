@@ -1,6 +1,6 @@
 {
   "name": "@easyrent-nz/components",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Design system with reusable react components",
   "license": "MIT",
   "main": "lib/index.js",
@@ -15,6 +15,8 @@
     "@babel/core": "^7.15.0",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
+    "@mui/icons-material": "^5.1.0",
+    "@mui/lab": "^5.0.0-alpha.54",
     "@mui/material": "^5.0.6",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
@@ -37,18 +39,26 @@
     "prettier": "^2.4.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-hook-form": "^7.19.4",
     "rollup": "^2.56.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.0",
+    "@date-io/date-fns": "^2.11.0",
+    "date-fns": "^2.25.0",
     "rollup-plugin-typescript2": "^0.30.0",
     "typescript": "^4.3.5"
   },
   "peerDependencies": {
+    "@date-io/date-fns": "^2.11.0",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
+    "@mui/icons-material": "^5.1.0",
+    "@mui/lab": "^5.0.0-alpha.54",
     "@mui/material": "^5.0.6",
+    "date-fns": "^2.25.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.19.4"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
