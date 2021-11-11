@@ -7,7 +7,7 @@ const StyledFormLabel = styled(FormLabel)(({ theme }) => ({
   fontWeight: 500,
 }));
 
-interface FormFieldWrapperProps extends FormControlProps {
+export interface FormFieldWrapperProps extends FormControlProps {
   label?: string;
   errorMessage?: string;
 }
