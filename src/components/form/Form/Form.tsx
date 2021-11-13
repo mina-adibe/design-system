@@ -1,5 +1,5 @@
 import React, { PropsWithChildren, useEffect } from 'react';
-import { FormProvider, Resolver, useForm, SubmitHandler } from 'react-hook-form';
+import { FormProvider, Resolver, SubmitHandler, useForm } from 'react-hook-form';
 
 export interface FormProps<T = {}> {
   onSubmit?: SubmitHandler<T>;

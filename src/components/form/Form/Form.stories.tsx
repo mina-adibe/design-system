@@ -1,6 +1,5 @@
 import { Button, Stack, Typography } from '@mui/material';
 import { Meta, Story } from '@storybook/react';
-import RadioSelection from '../RadioSelection/RadioSelection';
 import TextField from '../TextField/TextField';
 import Form, { FormProps } from './Form';
 
@@ -15,20 +14,6 @@ const Template: Story<FormProps> = () => (
       <Typography>Login</Typography>
       <TextField name='username' label='Username' />
       <TextField name='password' label='Password' />
-      <RadioSelection
-        name='gender'
-        label='Gender'
-        options={[
-          {
-            value: 'male',
-            label: 'Male',
-          },
-          {
-            value: 'female',
-            label: 'Female',
-          },
-        ]}
-      />
       <Button variant='contained'>Submit</Button>
     </Stack>
   </Form>
