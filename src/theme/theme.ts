@@ -1,30 +1,61 @@
 /* eslint-disable no-unused-vars */
+import { pickersDayClasses } from '@mui/lab';
+import { checkboxClasses, outlinedInputClasses, radioClasses } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
 import './font.css';
-import generateShadows from './shadows';
 
 declare module '@mui/material/styles' {
-  interface Shape {
-    surfaceRadius: number | string;
-    buttonRadius: number | string;
-  }
-
   interface Theme {
     shape: {
-      surfaceRadius: number | string;
-      buttonRadius: number | string;
+      cardRadius: number;
+      borderRadius: number;
+    };
+    decoration: {
+      glow: {
+        primary: string;
+        secondary: string;
+        warning: string;
+        error: string;
+        success: string;
+        info: string;
+      };
+      glowFilter: {
+        primary: string;
+        secondary: string;
+        warning: string;
+        error: string;
+        success: string;
+        info: string;
+      };
     };
   }
-
+  // allow configuration using `createTheme`
   interface ThemeOptions {
     shape?: {
-      surfaceRadius?: number | string;
-      buttonRadius?: number | string;
+      cardRadius?: number;
+    };
+    decoration?: {
+      glow?: {
+        primary?: string;
+        secondary?: string;
+        warning?: string;
+        error?: string;
+        success?: string;
+        info?: string;
+      };
+      glowFilter?: {
+        primary?: string;
+        secondary?: string;
+        warning?: string;
+        error?: string;
+        success?: string;
+        info?: string;
+      };
     };
   }
 }
 
-const theme = createTheme({
+let theme = createTheme({
   palette: {
     primary: {
       main: '#28C6C6',
@@ -44,8 +75,7 @@ const theme = createTheme({
     },
   },
   shape: {
-    buttonRadius: 4,
-    surfaceRadius: 8,
+    cardRadius: 8,
   },
   typography: {
     fontFamily: "'Open Sans', sans-serif",
@@ -76,17 +106,32 @@ const theme = createTheme({
       textTransform: 'none',
     },
   },
-  shadows: generateShadows() as any,
 });
 
-const finalTheme = createTheme(theme, {
+theme = createTheme(theme, {
+  decoration: {
+    glow: {
+      primary: `0 0 4px ${theme.palette.primary.light}`,
+      seconday: `0 0 4px ${theme.palette.secondary.light}`,
+      warning: `0 0 4px ${theme.palette.warning.light}`,
+      error: `0 0 4px ${theme.palette.error.light}`,
+      success: `0 0 4px ${theme.palette.success.light}`,
+      info: `0 0 4px ${theme.palette.info.light}`,
+    },
+    glowFilter: {
+      primary: `drop-shadow(0 0 8px ${theme.palette.primary.light});`,
+      seconday: `drop-shadow(0 0 8px ${theme.palette.secondary.light});`,
+      warning: `drop-shadow(0 0 8px ${theme.palette.warning.light});`,
+      error: `drop-shadow(0 0 8px ${theme.palette.error.light});`,
+      success: `drop-shadow(0 0 8px ${theme.palette.success.light});`,
+      info: `drop-shadow(0 0 8px ${theme.palette.info.light});`,
+    },
+  },
+});
+
+theme = createTheme(theme, {
   components: {
     MuiButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: theme.shape.buttonRadius,
-        },
-      },
       defaultProps: {
         disableElevation: true,
         color: 'secondary',
@@ -95,10 +140,9 @@ const finalTheme = createTheme(theme, {
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: theme.shape.surfaceRadius,
+          borderRadius: theme.shape.cardRadius,
         },
       },
-
       defaultProps: {
         elevation: 4,
       },
@@ -112,12 +156,59 @@ const finalTheme = createTheme(theme, {
     },
     MuiOutlinedInput: {
       styleOverrides: {
+        multiline: { padding: '0' },
         input: {
           padding: '10px 14px',
+        },
+        root: {
+          [`&.${outlinedInputClasses.focused} .${outlinedInputClasses.notchedOutline}`]: {
+            borderWidth: 1,
+            boxShadow: theme.decoration.glow.primary,
+          },
+          [`&.${outlinedInputClasses.focused}.${outlinedInputClasses.error} .${outlinedInputClasses.notchedOutline}`]:
+            {
+              boxShadow: theme.decoration.glow.error,
+            },
+        },
+      },
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          [`&.${checkboxClasses.checked}`]: {
+            filter: theme.decoration.glowFilter.primary,
+          },
+        },
+      },
+    },
+    MuiRadio: {
+      defaultProps: {
+        size: 'small',
+      },
+      styleOverrides: {
+        root: {
+          [`&.${radioClasses.checked}`]: {
+            filter: theme.decoration.glowFilter.primary,
+          },
+        },
+      },
+    },
+    MuiPickersDay: {
+      styleOverrides: {
+        root: {
+          [`&:focus.${pickersDayClasses.selected}`]: {
+            backgroundColor: theme.palette.secondary.light,
+          },
+          [`&.${pickersDayClasses.selected}`]: {
+            backgroundColor: theme.palette.secondary.main,
+          },
+          [`&.${pickersDayClasses.selected}:hover`]: {
+            backgroundColor: theme.palette.secondary.light,
+          },
         },
       },
     },
   },
 });
 
-export default finalTheme;
+export default createTheme(theme);

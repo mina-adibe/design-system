@@ -1,3 +1,4 @@
+import { InputAdornment } from '@mui/material';
 import { Meta, Story } from '@storybook/react';
 import Form from '../Form/Form';
 import TextField, { TextFieldProps } from './TextField';
@@ -21,11 +22,18 @@ export default {
     placeholder: {
       control: 'text',
     },
+    errorMessage: {
+      control: 'text',
+    },
   },
 } as Meta;
 
-const Template: Story<TextFieldProps> = (args) => (
-  <Form>
+interface TextFieldStoryProps extends TextFieldProps {
+  errorMessage?: string;
+}
+
+const Template: Story<TextFieldStoryProps> = ({ errorMessage, ...args }) => (
+  <Form errors={errorMessage ? { [args.name]: errorMessage } : {}}>
     <TextField {...args} />
   </Form>
 );
@@ -33,8 +41,26 @@ const Template: Story<TextFieldProps> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   label: 'Username',
-  disabled: false,
   required: false,
   name: 'username',
   placeholder: 'John Smith',
+};
+
+export const Money = Template.bind({});
+Money.args = {
+  label: 'Rent',
+  required: true,
+  name: 'rent',
+  type: 'number',
+  placeholder: '200.00',
+  startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+};
+
+export const TextArea = Template.bind({});
+TextArea.args = {
+  label: 'Describe Yourself',
+  name: 'rent',
+  placeholder: 'Tell us about yourself!',
+  multiline: true,
+  rows: 3,
 };

@@ -8,9 +8,6 @@ export interface TextFieldProps extends OutlinedInputProps {
    * The label to display above the input.
    */
   label?: string;
-  /**
-   * Error message to display below the input. This will cause the input to render in an error state.
-   */
   disabled?: boolean;
   required?: boolean;
   name: string;
@@ -38,7 +35,7 @@ const TextField: React.FC<TextFieldProps> = ({
   return (
     <FormFieldWrapper
       label={label}
-      errorMessage={errors[name]}
+      errorObject={errors[name]}
       disabled={disabled}
       required={required}
     >
