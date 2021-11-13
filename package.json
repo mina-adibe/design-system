@@ -13,6 +13,7 @@
   "author": "EasyRent",
   "devDependencies": {
     "@babel/core": "^7.15.0",
+    "@date-io/date-fns": "^2.11.0",
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "@mui/icons-material": "^5.1.0",
@@ -25,6 +26,7 @@
     "@typescript-eslint/parser": "^5.3.1",
     "babel-loader": "^8.2.2",
     "chromatic": "^5.9.2",
+    "date-fns": "^2.25.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -43,8 +45,6 @@
     "rollup": "^2.56.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.0",
-    "@date-io/date-fns": "^2.11.0",
-    "date-fns": "^2.25.0",
     "rollup-plugin-typescript2": "^0.30.0",
     "typescript": "^4.3.5"
   },
@@ -62,7 +62,7 @@
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook && echo design.easyrent.nz > storybook-static/CNAME",
+    "build-storybook": "build-storybook",
     "build": "rollup -c && node scripts/copy-pkg.js",
     "deploy-storybook": "storybook-to-ghpages",
     "clean": "rm -rf node_modules && yarn",

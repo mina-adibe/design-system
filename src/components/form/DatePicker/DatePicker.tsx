@@ -1,5 +1,5 @@
 import { DatePicker as MuiDatePicker, DatePickerProps as MuiDatePickerProps } from '@mui/lab';
-import { TextField } from '@mui/material';
+import { OutlinedInput } from '@mui/material';
 import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import FormFieldWrapper from '../FormFieldWrapper/FormFieldWrapper';
@@ -25,7 +25,9 @@ const DatePicker: React.FC<DatePickerProps> = ({ name, label }) => {
             value={value || null}
             onChange={(date) => onChange(date || undefined)}
             {...field}
-            renderInput={(params) => <TextField {...params} />}
+            renderInput={({ inputRef, inputProps, InputProps }) => (
+              <OutlinedInput ref={inputRef} inputProps={inputProps} {...InputProps} />
+            )}
           />
         </FormFieldWrapper>
       )}

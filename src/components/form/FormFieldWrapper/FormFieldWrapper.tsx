@@ -1,29 +1,31 @@
 import { FormControl, FormControlProps, FormHelperText, FormLabel, styled } from '@mui/material';
-import React from 'react';
+import React, { ReactNode } from 'react';
+import { ErrorOption } from 'react-hook-form';
 
 const StyledFormLabel = styled(FormLabel)(({ theme }) => ({
   marginLeft: theme.spacing(0.5),
+  marginBottom: theme.spacing(0.5),
   fontSize: theme.typography.body2.fontSize,
   fontWeight: 500,
 }));
 
 export interface FormFieldWrapperProps extends FormControlProps {
-  label?: string;
-  errorMessage?: string;
+  label?: ReactNode;
+  errorObject?: ErrorOption;
 }
 
 const FormFieldWrapper: React.FC<FormFieldWrapperProps> = ({
   children,
   label,
   required,
-  errorMessage,
+  errorObject,
   ...rest
 }) => {
   return (
-    <FormControl required={required} error={Boolean(errorMessage)} {...rest}>
+    <FormControl required={required} error={Boolean(errorObject)} {...rest}>
       {label && <StyledFormLabel>{label}</StyledFormLabel>}
       {children}
-      {errorMessage && <FormHelperText>{errorMessage}</FormHelperText>}
+      {errorObject && <FormHelperText>{errorObject?.message}</FormHelperText>}
     </FormControl>
   );
 };
