@@ -132,6 +132,11 @@ theme = createTheme(theme, {
 theme = createTheme(theme, {
   components: {
     MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+        },
+      },
       defaultProps: {
         disableElevation: true,
         color: 'secondary',

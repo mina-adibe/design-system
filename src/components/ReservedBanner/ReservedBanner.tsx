@@ -1,7 +1,7 @@
 import { Box, styled, Typography } from '@mui/material';
 import React from 'react';
 
-export interface BannerProps {
+export interface ReservedBannerProps {
   color?: 'primary' | 'secondary' | 'error' | 'warning' | 'info' | 'success';
   title: string;
   subTitle?: string;
@@ -16,7 +16,7 @@ const BannerShape = styled(Box)(({ theme }) => ({
   margin: `${theme.spacing(4)} 0`,
 }));
 
-const Banner: React.FC<BannerProps> = ({ color = 'primary', title, subTitle }) => {
+const ReservedBanner: React.FC<ReservedBannerProps> = ({ color = 'primary', title, subTitle }) => {
   return (
     <BannerShape sx={{ backgroundColor: `${color}.main` }}>
       <Typography
@@ -34,4 +34,4 @@ const Banner: React.FC<BannerProps> = ({ color = 'primary', title, subTitle }) =
   );
 };
 
-export default Banner;
+export default ReservedBanner;

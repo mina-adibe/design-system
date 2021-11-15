@@ -1,3 +1,4 @@
+import Visibility from '@mui/icons-material/Visibility';
 import { InputAdornment } from '@mui/material';
 import { Meta, Story } from '@storybook/react';
 import Form from '../Form/Form';
@@ -54,6 +55,20 @@ Money.args = {
   type: 'number',
   placeholder: '200.00',
   startAdornment: <InputAdornment position='start'>$</InputAdornment>,
+};
+
+export const Password = Template.bind({});
+Password.args = {
+  label: 'Password',
+  required: true,
+  name: 'rent',
+  type: 'password',
+  placeholder: '200.00',
+  endAdornment: (
+    <InputAdornment position='end'>
+      <Visibility />
+    </InputAdornment>
+  ),
 };
 
 export const TextArea = Template.bind({});
