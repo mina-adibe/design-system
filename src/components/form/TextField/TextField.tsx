@@ -40,7 +40,6 @@ const TextField: React.FC<TextFieldProps> = ({
       required={required}
     >
       <OutlinedInput
-        id='text-field'
         {...register(name, { valueAsNumber: type === 'number' })}
         type={type}
         {...rest}

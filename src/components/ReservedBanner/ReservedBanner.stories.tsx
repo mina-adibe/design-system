@@ -1,9 +1,9 @@
 import { Meta, Story } from '@storybook/react';
-import Banner, { BannerProps } from './Banner';
+import ReservedBanner, { ReservedBannerProps } from './ReservedBanner';
 
 export default {
-  component: Banner,
-  title: 'Components/Banner',
+  component: ReservedBanner,
+  title: 'Components/Reserved Banner',
   argTypes: {
     title: {
       control: 'text',
@@ -19,8 +19,8 @@ export default {
   },
 } as Meta;
 
-interface BannerStoryProps extends BannerProps {}
+interface BannerStoryProps extends ReservedBannerProps {}
 
-const Template: Story<BannerStoryProps> = (args) => <Banner {...args} />;
+const Template: Story<BannerStoryProps> = (args) => <ReservedBanner {...args} />;
 
 export const Default = Template.bind({});

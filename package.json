@@ -3,13 +3,9 @@
   "version": "0.6.0",
   "description": "Design system with reusable react components",
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "lib/index.esm.js",
-  "types": "lib/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alexn400/mui-storybook.git"
-  },
+  "main": "index.js",
+  "module": "index.esm.js",
+  "types": "index.d.ts",
   "author": "EasyRent",
   "devDependencies": {
     "@babel/core": "^7.15.0",
@@ -21,6 +17,7 @@
     "@mui/material": "^5.0.6",
     "@rollup/plugin-commonjs": "^20.0.0",
     "@rollup/plugin-node-resolve": "^13.0.4",
+    "@types/google.maps": "^3.46.1",
     "@types/react": "^17.0.16",
     "@typescript-eslint/eslint-plugin": "^5.3.1",
     "@typescript-eslint/parser": "^5.3.1",
@@ -45,8 +42,6 @@
     "rollup": "^2.56.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.0",
-    "@date-io/date-fns": "^2.11.0",
-    "date-fns": "^2.25.0",
     "rollup-plugin-typescript2": "^0.30.0",
     "typescript": "^4.3.5"
   },
@@ -76,6 +71,7 @@
     "@storybook/addon-essentials": "^6.3.6",
     "@storybook/addon-links": "^6.3.6",
     "@storybook/react": "^6.3.6",
-    "@storybook/storybook-deployer": "^2.8.10"
+    "@storybook/storybook-deployer": "^2.8.10",
+    "google-maps-react": "^2.0.6"
   }
 }
