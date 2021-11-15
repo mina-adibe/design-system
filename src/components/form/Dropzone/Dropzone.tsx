@@ -1,6 +1,6 @@
-import { Button, styled, SvgIcon, Typography } from '@mui/material';
-import React, { useState } from 'react';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
+import { ButtonBase, styled, SvgIcon, Typography } from '@mui/material';
+import React, { useState } from 'react';
 
 export interface DropzoneProps {
   /**
@@ -34,12 +34,14 @@ const StyledInput = styled('input')({
   cursor: 'pointer',
 });
 
-const Zone = styled(Button)(({ theme }) => ({
+const Zone = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
   border: `1px dashed ${theme.palette.grey['400']}`,
   padding: `${theme.spacing(2)} ${theme.spacing(4)}`,
+  borderRadius: theme.shape.borderRadius,
+  ...theme.typography.button,
 }));
 
 /**
@@ -75,9 +77,9 @@ const Dropzone: React.FC<DropzoneProps> = ({
   };
 
   return (
-    <>
+    // eslint-disable-next-line jsx-a11y/label-has-associated-control
+    <label>
       <Zone
-        component='label'
         tabIndex={-1}
         onDragOver={() => setHovered(true)}
         onDragEnter={() => setHovered(true)}
@@ -92,7 +94,7 @@ const Dropzone: React.FC<DropzoneProps> = ({
         {prompt}
         <Typography variant='caption'>or click to browse</Typography>
       </Zone>
-    </>
+    </label>
   );
 };
 

@@ -4,15 +4,18 @@ import { useFormContext } from 'react-hook-form';
 import FormFieldWrapper from '../FormFieldWrapper/FormFieldWrapper';
 
 export interface DropdownProps<T> extends SelectProps<T> {
-  label: string;
+  label?: string;
   name: string;
 }
 
 const Dropdown = <T,>({ children, label, name }: PropsWithChildren<DropdownProps<T>>) => {
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext();
 
   return (
-    <FormFieldWrapper label={label}>
+    <FormFieldWrapper label={label} errorObject={errors[name]}>
       <Select {...register(name)}>{children}</Select>
     </FormFieldWrapper>
   );

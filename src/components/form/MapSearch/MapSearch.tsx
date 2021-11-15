@@ -17,7 +17,7 @@ import {
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
 import React, { useMemo, useState } from 'react';
 import cities from './cities';
-import mapStyle from './mapStyle.json';
+import mapStyle from './mapStyle';
 
 export interface ListingPin {
   lat: number;

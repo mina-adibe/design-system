@@ -4,7 +4,7 @@ import {
   CalendarPicker as MuiCalendarPicker,
   CalendarPickerProps as MuiCalendarPickerProps,
 } from '@mui/lab';
-import { DateType } from '@date-io/type';
+import DateType from '@date-io/date-fns';
 import FormFieldWrapper from '../FormFieldWrapper/FormFieldWrapper';
 
 export interface CalendarPickerProps extends MuiCalendarPickerProps<DateType> {
@@ -23,7 +23,7 @@ const CalendarPicker: React.FC<CalendarPickerProps> = ({ name, label, ...rest })
       control={control}
       name={name}
       render={({ field: { value, onChange, ...field } }) => (
-        <FormFieldWrapper errorMessage={errors[name]} label={label}>
+        <FormFieldWrapper errorObject={errors[name]} label={label}>
           <MuiCalendarPicker
             {...rest}
             date={value}

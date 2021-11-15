@@ -20,7 +20,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ name, label }) => {
       control={control}
       name={name}
       render={({ field: { value, onChange, ...field } }) => (
-        <FormFieldWrapper errorMessage={errors[name]} label={label}>
+        <FormFieldWrapper errorObject={errors[name]} label={label}>
           <MuiDatePicker
             value={value || null}
             onChange={(date) => onChange(date || undefined)}
