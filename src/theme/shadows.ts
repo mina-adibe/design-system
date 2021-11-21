@@ -4,27 +4,29 @@ const color = (opacity: number) => `rgba(${COLOR},${opacity})`;
 
 const OPACITY_LAYERS = [0.1, 0.075, 0.05];
 
-const x = (i: number) => [0.2, 0.1, 0.05][i - 1];
+// Generates the X offset for a given height
+const genXOffset = (i: number) => 0.5 ** (i - 1) * 0.2;
 
-const y = (i: number) => [0.4, 0.3, 0.1][i - 1];
+const genYOffset = (i: number) => [0.4, 0.3, 0.1][i - 1];
 
-const b = (i: number) => [4, 6, 8][i - 1];
+const genBlur = (i: number) => 2 + 2 * i;
 
-const i = (n: number) => [-0.2, 0, 0.1][n - 1];
+const genInset = (i: number) => [-0.2, 0, 0.1][i - 1];
 
 const sh = (e: number, v: number) => {
-  const cx = Math.floor(e * x(v));
-  const cy = Math.floor(e * y(v));
-  const cb = Math.floor(e * b(v));
-  const ci = i(v);
+  const cx = Math.floor(e * genXOffset(v));
+  const cy = Math.floor(e * genYOffset(v));
+  const cb = Math.floor(e * genBlur(v));
+  const ci = genInset(v);
 
   return [cx, cy, cb, ci].map((p) => `${p}px`).join(' ');
 };
 
-export const createShadow = (e: number) => {
-  return [sh(e, 1), sh(e, 2), sh(e, 3)]
-    .map((v, index) => `${v} ${color(OPACITY_LAYERS[index])}`)
-    .join(',');
+export const createShadow = (e: number, n: number = 3) => {
+  return Array(n)
+    .fill(0)
+    .map((_, i) => sh(e, i + 1))
+    .map((v, index) => `${v} ${color(OPACITY_LAYERS[index])}`);
 };
 
 const generateShadows = () => {

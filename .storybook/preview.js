@@ -1,4 +1,4 @@
-import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
+import { ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
 import theme from '../src/theme/theme';
 
 export const parameters = {
@@ -16,6 +16,7 @@ export const decorators = [
   (Story) => {
     return (
       <MuiThemeProvider theme={theme}>
+        <CssBaseline />
         <Story />
       </MuiThemeProvider>
     );

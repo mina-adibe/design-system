@@ -1,4 +1,4 @@
-import { Stack, Typography } from '@mui/material';
+import { Box, Stack, Typography } from '@mui/material';
 import { Meta, Story } from '@storybook/react';
 import { useState } from 'react';
 import MapSearch, { MapSearchProps } from './MapSearch';
@@ -24,7 +24,9 @@ const Template: Story<MapSearchStoryProps> = (args) => {
 
   return (
     <Stack>
-      <MapSearch {...args} onSelectedListingChange={(id: string) => setSelectedListing(id)} />
+      <Box sx={{ width: 600, height: 400 }}>
+        <MapSearch {...args} onSelectedListingChange={(id: string) => setSelectedListing(id)} />
+      </Box>
       <Typography>Selected Listing: {selectedListing}</Typography>
     </Stack>
   );

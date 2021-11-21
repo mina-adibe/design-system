@@ -19,13 +19,17 @@ const BgImage = styled('img')(() => ({
   objectFit: 'cover',
   mixBlendMode: 'luminosity',
   opacity: 0.15,
-  zIndex: 0,
+  // isolation: 'isolate',
 }));
+
+const Content = styled('div')({
+  position: 'relative',
+});
 
 const Hero: React.FC<HeroProps> = ({ children, src }) => (
   <Background>
     <BgImage src={src} />
-    {children}
+    <Content>{children}</Content>
   </Background>
 );
 

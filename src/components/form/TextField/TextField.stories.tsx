@@ -1,5 +1,5 @@
 import Visibility from '@mui/icons-material/Visibility';
-import { InputAdornment } from '@mui/material';
+import { IconButton, InputAdornment } from '@mui/material';
 import { Meta, Story } from '@storybook/react';
 import Form from '../Form/Form';
 import TextField, { TextFieldProps } from './TextField';
@@ -66,7 +66,9 @@ Password.args = {
   placeholder: '200.00',
   endAdornment: (
     <InputAdornment position='end'>
-      <Visibility />
+      <IconButton>
+        <Visibility />
+      </IconButton>
     </InputAdornment>
   ),
 };

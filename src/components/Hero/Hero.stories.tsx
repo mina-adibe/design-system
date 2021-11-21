@@ -16,7 +16,7 @@ const Template: Story<HeroStoryProps> = ({ src }) => (
   <Box sx={{ position: 'absolute', left: 0, right: 0, top: 0 }}>
     <Hero src={src}>
       <Container sx={{ py: 16, px: 4 }}>
-        <Typography variant='h3' color='primary.contrastText'>
+        <Typography variant='h1' color='primary.contrastText'>
           EasyRent is really cool
         </Typography>
       </Container>

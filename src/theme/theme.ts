@@ -33,6 +33,7 @@ declare module '@mui/material/styles' {
   interface ThemeOptions {
     shape?: {
       cardRadius?: number;
+      borderRadius?: number;
     };
     decoration?: {
       glow?: {
@@ -75,13 +76,20 @@ let theme = createTheme({
     },
   },
   shape: {
+    borderRadius: 8,
     cardRadius: 8,
   },
   typography: {
     fontFamily: "'Open Sans', sans-serif",
     h1: {
       fontFamily: "'Raleway', sans-serif",
-      fontWeight: 400,
+      fontWeight: 600,
+      fontSize: '4.5rem',
+    },
+    h2: {
+      fontFamily: "'Raleway', sans-serif",
+      fontWeight: 600,
+      fontSize: '3.5rem',
     },
     h3: {
       fontFamily: "'Raleway', sans-serif",
@@ -132,11 +140,6 @@ theme = createTheme(theme, {
 theme = createTheme(theme, {
   components: {
     MuiButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: 8,
-        },
-      },
       defaultProps: {
         disableElevation: true,
         color: 'secondary',

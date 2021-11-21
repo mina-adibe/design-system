@@ -2,22 +2,11 @@
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { LoadingButton } from '@mui/lab';
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Card,
-  CardContent,
-  Chip,
-  Paper,
-  Stack,
-  styled,
-  Typography,
-} from '@mui/material';
-import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
+import { Box, Button, ButtonGroup, Card, Paper, Stack, styled, Typography } from '@mui/material';
+import { Marker } from 'google-maps-react';
 import React, { useMemo, useState } from 'react';
+import MapView from '../../MapView/MapView';
 import cities from './cities';
-import mapStyle from './mapStyle';
 
 export interface ListingPin {
   lat: number;
@@ -28,7 +17,6 @@ export interface ListingPin {
 }
 
 export interface MapSearchProps {
-  google: any;
   onChange: (pos: { lat: number; lng: number }, zoom: number) => Promise<void>;
   listings: ListingPin[];
   onSelectedListingChange: (id: string) => void;
@@ -53,7 +41,6 @@ const Overlay = styled(Stack)({
 });
 
 const MapSearch: React.FC<MapSearchProps> = ({
-  google,
   onChange,
   listings = [],
   onSelectedListingChange,
@@ -85,14 +72,12 @@ const MapSearch: React.FC<MapSearchProps> = ({
 
   return (
     <>
-      <Box sx={{ width: '600px', height: '400px', position: 'relative' }}>
-        <Map
-          google={google}
+      <Box sx={{ position: 'relative', width: '100%', height: '100%' }}>
+        <MapView
           zoom={zoom}
           scrollwheel
           initialCenter={pos}
           disableDefaultUI
-          styles={mapStyle}
           onZoomChanged={(p, m) => {
             setHasChanged(true);
             const z = m?.getZoom();
@@ -105,17 +90,26 @@ const MapSearch: React.FC<MapSearchProps> = ({
           }}
         >
           {markers}
-        </Map>
-        <Paper elevation={4} sx={{ position: 'absolute', right: 8, top: 8 }}>
-          <ButtonGroup orientation='vertical' variant='outlined' aria-label='outlined button group'>
-            <ZoomButton onClick={() => setZoom((z) => z + 1)}>
-              <AddIcon />
-            </ZoomButton>
-            <ZoomButton onClick={() => setZoom((z) => z - 1)}>
-              <RemoveIcon />
-            </ZoomButton>
-          </ButtonGroup>
-        </Paper>
+        </MapView>
+        <ButtonGroup
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            boxShadow: (theme) => theme.shadows[4],
+            background: 'white',
+          }}
+          orientation='vertical'
+          variant='outlined'
+          aria-label='Map Zoom Controls'
+        >
+          <ZoomButton onClick={() => setZoom((z) => z + 1)}>
+            <AddIcon />
+          </ZoomButton>
+          <ZoomButton onClick={() => setZoom((z) => z - 1)}>
+            <RemoveIcon />
+          </ZoomButton>
+        </ButtonGroup>
         <Overlay alignItems='center'>
           {hasChanged ? (
             <LoadingButton
@@ -135,11 +129,8 @@ const MapSearch: React.FC<MapSearchProps> = ({
         </Overlay>
         )
       </Box>
-      <Typography>{zoom}</Typography>
     </>
   );
 };
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyD4ecsun_itWQdd-KVPEuuZjXCKET21mUQ',
-})(MapSearch);
+export default MapSearch;
