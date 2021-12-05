@@ -28,6 +28,7 @@ module.exports = {
   rules: {
     // suppress errors for missing 'import React' in files
     'react/react-in-jsx-scope': 0,
+    'no-use-before-define': 0,
     // allow jsx syntax in js files
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', 'ts', '.tsx'] }],
     'line-comment-position': [

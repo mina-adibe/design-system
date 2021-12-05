@@ -1,15 +1,24 @@
 /* eslint-disable no-unused-vars */
 import { pickersDayClasses } from '@mui/lab';
 import { checkboxClasses, outlinedInputClasses, radioClasses } from '@mui/material';
-import { createTheme } from '@mui/material/styles';
+import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import './font.css';
 
 declare module '@mui/material/styles' {
+  interface PaletteColor {
+    alt: string;
+  }
+
+  interface SimplePaletteColorOptions {
+    alt?: string;
+  }
+
+  interface Palette {
+    primary: PaletteColor;
+    secondary: PaletteColor;
+  }
+
   interface Theme {
-    shape: {
-      cardRadius: number;
-      borderRadius: number;
-    };
     decoration: {
       glow: {
         primary: string;
@@ -29,12 +38,7 @@ declare module '@mui/material/styles' {
       };
     };
   }
-  // allow configuration using `createTheme`
   interface ThemeOptions {
-    shape?: {
-      cardRadius?: number;
-      borderRadius?: number;
-    };
     decoration?: {
       glow?: {
         primary?: string;
@@ -59,12 +63,34 @@ declare module '@mui/material/styles' {
 let theme = createTheme({
   palette: {
     primary: {
-      main: '#28C6C6',
-      contrastText: '#fff',
+      main: '#25C1B9',
+      contrastText: '#FFF',
+      alt: '#4DC9FF',
     },
     secondary: {
       main: '#29302F',
-      contrastText: '#fff',
+      contrastText: '#FFF',
+      alt: '#42625D',
+    },
+    error: {
+      main: '#F25642',
+      contrastText: '#FFF',
+      alt: '#FC8653',
+    },
+    warning: {
+      main: '#EC930E',
+      contrastText: '#FFF',
+      alt: '#FBC91A',
+    },
+    success: {
+      main: '#31CA6E',
+      contrastText: '#FFF',
+      alt: '#8AE056',
+    },
+    info: {
+      main: '#20BFE2',
+      contrastText: '#FFF',
+      alt: '#2091E2',
     },
     background: {
       default: '#FCFDFD',
@@ -77,37 +103,32 @@ let theme = createTheme({
   },
   shape: {
     borderRadius: 8,
-    cardRadius: 8,
   },
   typography: {
     fontFamily: "'Open Sans', sans-serif",
     h1: {
       fontFamily: "'Raleway', sans-serif",
-      fontWeight: 600,
-      fontSize: '4.5rem',
+      fontWeight: 800,
     },
     h2: {
       fontFamily: "'Raleway', sans-serif",
-      fontWeight: 600,
-      fontSize: '3.5rem',
+      fontWeight: 800,
     },
     h3: {
       fontFamily: "'Raleway', sans-serif",
-      fontWeight: 600,
-      fontSize: '2.5rem',
+      fontWeight: 800,
     },
     h4: {
       fontFamily: "'Raleway', sans-serif",
-      fontWeight: 600,
-      fontSize: '2rem',
+      fontWeight: 700,
     },
     h5: {
       fontFamily: "'Raleway', sans-serif",
-      fontWeight: 600,
+      fontWeight: 700,
     },
     h6: {
       fontFamily: "'Raleway', sans-serif",
-      fontWeight: 600,
+      fontWeight: 700,
     },
     button: {
       fontWeight: 600,
@@ -146,11 +167,6 @@ theme = createTheme(theme, {
       },
     },
     MuiCard: {
-      styleOverrides: {
-        root: {
-          borderRadius: theme.shape.cardRadius,
-        },
-      },
       defaultProps: {
         elevation: 4,
       },
@@ -218,5 +234,7 @@ theme = createTheme(theme, {
     },
   },
 });
+
+theme = responsiveFontSizes(theme);
 
 export default createTheme(theme);
