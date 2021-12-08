@@ -2,7 +2,7 @@ import Room from '@mui/icons-material/Room';
 import { Autocomplete, TextField } from '@mui/material';
 import { GoogleAPI, GoogleApiWrapper } from 'google-maps-react';
 import React, { useEffect, useMemo, useRef } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import FormFieldWrapper from '../FormFieldWrapper/FormFieldWrapper';
 
 export interface AreaSearchProps {
@@ -16,6 +16,11 @@ export interface AreaSearchProps {
   searchDelay?: number;
 }
 
+export interface AreaSearchResult {
+  id: string;
+  name: string;
+}
+
 const AreaSearch: React.FC<AreaSearchProps> = ({
   label,
   name,
@@ -25,7 +30,7 @@ const AreaSearch: React.FC<AreaSearchProps> = ({
 }) => {
   const [inputValue, setInputValue] = React.useState('');
 
-  const [results, setResults] = React.useState<{ label: string; value: string }[]>([]);
+  const [results, setResults] = React.useState<{ label: string; value: AreaSearchResult }[]>([]);
 
   const placeService = useMemo(() => new google.maps.places.AutocompleteService(), []);
   const session = useMemo(() => new google.maps.places.AutocompleteSessionToken(), []);
@@ -36,6 +41,7 @@ const AreaSearch: React.FC<AreaSearchProps> = ({
 
   const {
     formState: { errors },
+    control,
   } = useFormContext();
 
   useEffect(() => {
@@ -55,7 +61,10 @@ const AreaSearch: React.FC<AreaSearchProps> = ({
             setResults(
               res.predictions.map((p) => ({
                 label: `${p.structured_formatting.main_text}, ${p.structured_formatting.secondary_text}`,
-                value: p.place_id,
+                value: {
+                  id: p.place_id,
+                  name: p.structured_formatting.main_text,
+                },
               }))
             );
           });
@@ -66,28 +75,35 @@ const AreaSearch: React.FC<AreaSearchProps> = ({
   }, [inputValue]);
 
   return (
-    <FormFieldWrapper label={label} errorObject={errors[name]} sx={{ width: '100%' }}>
-      <Autocomplete
-        sx={{ width: '100%' }}
-        disablePortal
-        onInputChange={(e, v) => setInputValue(v)}
-        inputValue={inputValue}
-        noOptionsText={inputValue ? 'No results' : 'Type to search'}
-        filterOptions={(x) => x}
-        id='combo-box-demo'
-        options={results}
-        renderInput={({ InputProps, ...params }) => (
-          <TextField
-            {...params}
-            placeholder={placeholder}
-            InputProps={{
-              ...InputProps,
-              startAdornment: <Room />,
-            }}
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => (
+        <FormFieldWrapper label={label} errorObject={errors[name]} sx={{ width: '100%' }}>
+          <Autocomplete
+            sx={{ width: '100%' }}
+            disablePortal
+            onInputChange={(e, v) => setInputValue(v)}
+            inputValue={inputValue}
+            noOptionsText={inputValue ? 'No results' : 'Type to search'}
+            filterOptions={(x) => x}
+            id='combo-box-demo'
+            {...field}
+            options={results}
+            renderInput={({ InputProps, ...params }) => (
+              <TextField
+                {...params}
+                placeholder={placeholder}
+                InputProps={{
+                  ...InputProps,
+                  startAdornment: <Room />,
+                }}
+              />
+            )}
           />
-        )}
-      />
-    </FormFieldWrapper>
+        </FormFieldWrapper>
+      )}
+    />
   );
 };
 
