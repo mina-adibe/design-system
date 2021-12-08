@@ -1,24 +1,26 @@
 import Room from '@mui/icons-material/Room';
-import { Autocomplete, TextField } from '@mui/material';
+import { Autocomplete, AutocompleteProps, TextField } from '@mui/material';
 import { GoogleAPI, GoogleApiWrapper } from 'google-maps-react';
 import React, { useEffect, useMemo, useRef } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import FormFieldWrapper from '../FormFieldWrapper/FormFieldWrapper';
 
-export interface AreaSearchProps {
+export interface AreaSearchProps
+  extends Omit<
+    AutocompleteProps<AreaSearchOption, false, false, false>,
+    'options' | 'renderInput'
+  > {
   label?: string;
   google: GoogleAPI;
   name: string;
-  placeholder?: string;
   /**
    * Specifies how long the field should wait before it makes a request to the server
    */
   searchDelay?: number;
 }
-
-export interface AreaSearchResult {
+export interface AreaSearchOption {
+  label: string;
   id: string;
-  name: string;
 }
 
 const AreaSearch: React.FC<AreaSearchProps> = ({
@@ -27,10 +29,11 @@ const AreaSearch: React.FC<AreaSearchProps> = ({
   google,
   placeholder,
   searchDelay = 200,
+  ...rest
 }) => {
   const [inputValue, setInputValue] = React.useState('');
 
-  const [results, setResults] = React.useState<{ label: string; value: AreaSearchResult }[]>([]);
+  const [results, setResults] = React.useState<AreaSearchOption[]>([]);
 
   const placeService = useMemo(() => new google.maps.places.AutocompleteService(), []);
   const session = useMemo(() => new google.maps.places.AutocompleteSessionToken(), []);
@@ -61,10 +64,8 @@ const AreaSearch: React.FC<AreaSearchProps> = ({
             setResults(
               res.predictions.map((p) => ({
                 label: `${p.structured_formatting.main_text}, ${p.structured_formatting.secondary_text}`,
-                value: {
-                  id: p.place_id,
-                  name: p.structured_formatting.main_text,
-                },
+                id: p.place_id,
+                name: p.structured_formatting.main_text,
               }))
             );
           });
@@ -78,17 +79,19 @@ const AreaSearch: React.FC<AreaSearchProps> = ({
     <Controller
       name={name}
       control={control}
-      render={({ field }) => (
+      render={({ field: { value, onChange, ...field } }) => (
         <FormFieldWrapper label={label} errorObject={errors[name]} sx={{ width: '100%' }}>
-          <Autocomplete
+          <Autocomplete<AreaSearchOption, false, false, false>
             sx={{ width: '100%' }}
-            disablePortal
             onInputChange={(e, v) => setInputValue(v)}
             inputValue={inputValue}
             noOptionsText={inputValue ? 'No results' : 'Type to search'}
             filterOptions={(x) => x}
-            id='combo-box-demo'
-            {...field}
+            blurOnSelect
+            getOptionLabel={(option) => option.label}
+            isOptionEqualToValue={(o, v) => o.label === v.label}
+            value={value === undefined ? null : value}
+            onChange={(e, v) => onChange(v)}
             options={results}
             renderInput={({ InputProps, ...params }) => (
               <TextField
@@ -100,6 +103,8 @@ const AreaSearch: React.FC<AreaSearchProps> = ({
                 }}
               />
             )}
+            {...field}
+            {...rest}
           />
         </FormFieldWrapper>
       )}

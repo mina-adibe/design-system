@@ -24,4 +24,4 @@ export type { PhotoGridProps } from './PhotoGrid/PhotoGrid';
 export type { PhotoUploadProps } from './PhotoUpload/PhotoUpload';
 export type { RadioSelectionProps } from './RadioSelection/RadioSelection';
 export type { TextFieldProps } from './TextField/TextField';
-export type { AreaSearchProps } from './AreaSearch/AreaSearch';
+export type { AreaSearchProps, AreaSearchOption } from './AreaSearch/AreaSearch';

@@ -1,8 +1,9 @@
 import { LocalizationProvider } from '@mui/lab';
 import DateAdapter from '@mui/lab/AdapterDateFns';
-import { Stack } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 import { Meta, Story } from '@storybook/react';
 import locale from 'date-fns/locale/en-NZ';
+import { useState } from 'react';
 import Form from '../Form/Form';
 import AreaSearch, { AreaSearchProps } from './AreaSearch';
 
@@ -19,15 +20,27 @@ export default {
   },
 } as Meta;
 
-const Template: Story<AreaSearchProps> = (args) => (
-  <LocalizationProvider dateAdapter={DateAdapter} locale={locale}>
-    <Form>
-      <Stack sx={{ width: '300px' }}>
-        <AreaSearch {...args} />
-      </Stack>
-    </Form>
-  </LocalizationProvider>
-);
+const Template: Story<AreaSearchProps> = (args) => {
+  const [data, setData] = useState();
+
+  const onSubmit = (v: any) => {
+    setData(v);
+  };
+
+  return (
+    <LocalizationProvider dateAdapter={DateAdapter} locale={locale}>
+      <Form onSubmit={onSubmit}>
+        <Stack sx={{ width: '300px' }} spacing={2}>
+          <AreaSearch {...args} />
+          <Button type='submit' variant='contained'>
+            Submit
+          </Button>
+        </Stack>
+        {JSON.stringify(data)}
+      </Form>
+    </LocalizationProvider>
+  );
+};
 
 export const Default = Template.bind({});
 Default.args = {

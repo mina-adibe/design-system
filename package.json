@@ -1,6 +1,6 @@
 {
   "name": "@easyrent-nz/components",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "Design system with reusable react components",
   "license": "MIT",
   "main": "index.js",
