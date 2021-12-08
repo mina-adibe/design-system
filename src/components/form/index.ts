@@ -10,6 +10,7 @@ export { default as PhotoGrid } from './PhotoGrid/PhotoGrid';
 export { default as PhotoUpload } from './PhotoUpload/PhotoUpload';
 export { default as RadioSelection } from './RadioSelection/RadioSelection';
 export { default as TextField } from './TextField/TextField';
+export { default as AreaSearch } from './AreaSearch/AreaSearch';
 
 export type { CalendarPickerProps } from './CalendarPicker/CalendarPicker';
 export type { CheckboxProps } from './Checkbox/Checkbox';
@@ -23,3 +24,4 @@ export type { PhotoGridProps } from './PhotoGrid/PhotoGrid';
 export type { PhotoUploadProps } from './PhotoUpload/PhotoUpload';
 export type { RadioSelectionProps } from './RadioSelection/RadioSelection';
 export type { TextFieldProps } from './TextField/TextField';
+export type { AreaSearchProps } from './AreaSearch/AreaSearch';
