@@ -21,6 +21,7 @@ export interface AreaSearchProps
 export interface AreaSearchOption {
   label: string;
   id: string;
+  name: string;
 }
 
 const AreaSearch: React.FC<AreaSearchProps> = ({
