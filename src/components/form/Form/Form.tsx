@@ -1,15 +1,17 @@
-import React, { PropsWithChildren, useEffect } from 'react';
-import { FormProvider, Resolver, SubmitHandler, useForm } from 'react-hook-form';
+import { PropsWithChildren, useEffect } from 'react';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { ObjectSchema } from 'yup';
 
-export interface FormProps<T = {}> {
+export interface FormProps<T extends Record<string, any> = {}> {
   onSubmit?: SubmitHandler<T>;
-  schema?: Resolver<T>;
+  schema?: ObjectSchema<T>;
   errors?: Record<keyof T, string>;
 }
 
 const Form = <T,>({ children, schema, onSubmit, errors }: PropsWithChildren<FormProps<T>>) => {
   const methods = useForm({
-    resolver: schema,
+    resolver: schema ? yupResolver(schema) : undefined,
   });
 
   useEffect(() => {
