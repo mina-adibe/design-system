@@ -20,8 +20,13 @@ const schemas = [
   },
 ];
 
+const handleSubmit = (v: any) => {
+  console.log(v);
+};
+
 const Template: Story<MultistepFormStoryProps> = () => (
   <MultistepForm
+    onSubmit={handleSubmit}
     schema={schemas}
     render={({ form, goForward, goBack }) => (
       <Card>

@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { PropsWithChildren, ReactNode, useEffect, useMemo, useState } from 'react';
+import React, { PropsWithChildren, ReactNode, useEffect, useMemo, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm, UseFormReturn } from 'react-hook-form';
 import SwipeableViews, { SwipeableViewsProps } from 'react-swipeable-views';
 import { object, ObjectSchema } from 'yup';
@@ -19,6 +19,8 @@ export interface MultistepFormProps<T extends Record<string, any> = {}> {
 interface MultistepFormRenderProps<T = any> {
   form: ReactNode;
   step: number;
+  isConfirmationPage: boolean;
+  numSteps: number;
   goForward: () => void;
   goBack: () => void;
   methods: UseFormReturn<T>;
@@ -82,8 +84,8 @@ const MultistepForm = <T,>({
       const res = await methods.trigger();
       if (res) {
         if (step < schema.length) {
-          if (onSubmit) {
-            methods.handleSubmit(onSubmit);
+          if (onSubmit && step === schema.length - 1) {
+            methods.handleSubmit(onSubmit)();
           }
           setStep((s) => s + 1);
         }
@@ -99,11 +101,13 @@ const MultistepForm = <T,>({
     return {
       form,
       step,
+      numSteps: schema.length,
+      isConfirmationPage: step > schema.length - 1,
       goForward,
       goBack,
       methods,
     };
-  }, [step, methods, children, swipeableViewsProps]);
+  }, [step, methods, children, swipeableViewsProps, schema]);
 
   return (
     <FormProvider {...methods}>

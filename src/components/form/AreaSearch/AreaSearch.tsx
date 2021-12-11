@@ -74,6 +74,7 @@ const AreaSearch: React.FC<AreaSearchProps> = ({
     } else {
       setResults([]);
     }
+    return () => window.clearTimeout(searchTimeout.current);
   }, [inputValue]);
 
   return (
