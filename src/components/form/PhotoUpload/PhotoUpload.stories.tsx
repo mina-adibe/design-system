@@ -1,5 +1,6 @@
-import { Stack } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 import { Meta, Story } from '@storybook/react';
+import { Form } from '..';
 import PhotoUpload, { PhotoUploadProps } from './PhotoUpload';
 
 export default {
@@ -18,9 +19,15 @@ export default {
 interface PhotoUploadStoryProps extends PhotoUploadProps {}
 
 const Template: Story<PhotoUploadStoryProps> = (args) => (
-  <Stack>
-    <PhotoUpload {...args} />
-  </Stack>
+  <Form onSubmit={(v) => console.log(v)}>
+    <Stack>
+      <PhotoUpload {...args} />
+      <Button type='submit'>Submit</Button>
+    </Stack>
+  </Form>
 );
 
 export const Default = Template.bind({});
+Default.args = {
+  name: 'photos',
+};

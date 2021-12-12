@@ -3,9 +3,7 @@ const readFileAsync = (file: Blob): Promise<string> =>
     const reader = new FileReader();
 
     reader.onload = () => {
-      setTimeout(() => {
-        resolve(reader.result as any);
-      }, 10000);
+      resolve(reader.result as any);
     };
 
     reader.onerror = reject;

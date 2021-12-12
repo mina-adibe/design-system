@@ -31,7 +31,12 @@ const PhotoContainer = styled(Grid)({
   },
 });
 
-const PhotoGrid: React.FC<PhotoGridProps> = ({ value, onChange, loadingImages = 0, readOnly }) => {
+const PhotoGrid: React.FC<PhotoGridProps> = ({
+  value = [],
+  onChange,
+  loadingImages = 0,
+  readOnly,
+}) => {
   const deletePhoto = (index: number) => {
     const newPhotos = [...value];
     newPhotos.splice(index, 1);

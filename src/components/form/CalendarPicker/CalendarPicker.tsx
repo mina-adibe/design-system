@@ -7,7 +7,8 @@ import {
 import DateType from '@date-io/date-fns';
 import FormFieldWrapper from '../FormFieldWrapper/FormFieldWrapper';
 
-export interface CalendarPickerProps extends MuiCalendarPickerProps<DateType> {
+export interface CalendarPickerProps
+  extends Omit<MuiCalendarPickerProps<DateType>, 'date' | 'onChange'> {
   name: string;
   label?: string;
 }

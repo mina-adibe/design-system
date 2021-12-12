@@ -29,13 +29,15 @@ const StyledInput = styled('input')({
   position: 'absolute',
   top: 0,
   left: 0,
+  display: 'block',
+  width: '100%',
   right: 0,
   bottom: 0,
   cursor: 'pointer',
 });
 
 const Zone = styled(ButtonBase)(({ theme }) => ({
-  position: 'relative',
+  width: '100%',
   display: 'flex',
   flexDirection: 'column',
   border: `1px dashed ${theme.palette.grey['400']}`,
@@ -77,24 +79,27 @@ const Dropzone: React.FC<DropzoneProps> = ({
   };
 
   return (
-    // eslint-disable-next-line jsx-a11y/label-has-associated-control
-    <label>
-      <Zone
-        tabIndex={-1}
-        onDragOver={() => setHovered(true)}
-        onDragEnter={() => setHovered(true)}
-        onDrop={() => setHovered(false)}
-        onDragLeave={() => setHovered(false)}
-        onDragExit={() => setHovered(false)}
-        sx={{ backgroundColor: hovered ? 'grey.100' : '' }}
-        disabled={disabled}
-      >
-        <StyledInput type='file' multiple={multiple} onChange={handleChange} accept={accept} />
-        <Icon color={disabled ? 'disabled' : 'primary'} fontSize='large' />
-        {prompt}
-        <Typography variant='caption'>or click to browse</Typography>
-      </Zone>
-    </label>
+    <Zone
+      tabIndex={-1}
+      onDragOver={() => setHovered(true)}
+      onDragEnter={() => setHovered(true)}
+      onDrop={() => setHovered(false)}
+      onDragLeave={() => setHovered(false)}
+      onDragExit={() => setHovered(false)}
+      sx={{ backgroundColor: hovered ? 'grey.100' : '' }}
+      disabled={disabled}
+    >
+      <StyledInput
+        id='upload'
+        type='file'
+        multiple={multiple}
+        onChange={handleChange}
+        accept={accept}
+      />
+      <Icon color={disabled ? 'disabled' : 'primary'} fontSize='large' />
+      {prompt}
+      <Typography variant='caption'>or click to browse</Typography>
+    </Zone>
   );
 };
 
