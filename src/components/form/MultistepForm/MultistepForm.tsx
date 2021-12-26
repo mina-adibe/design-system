@@ -1,15 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { PropsWithChildren, ReactNode, useEffect, useMemo, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm, UseFormReturn } from 'react-hook-form';
-import SwipeableViews, { SwipeableViewsProps } from 'react-swipeable-views';
 import { object, ObjectSchema } from 'yup';
 
 export interface MultistepFormProps<T extends Record<string, any> = {}> {
   onSubmit?: SubmitHandler<T>;
   schema?: Array<Record<string, any>>;
   errors?: Record<keyof T, string>;
-  dynamicHeight?: boolean;
-  swipeableViewsProps?: Omit<SwipeableViewsProps, 'ref'>;
   // eslint-disable-next-line no-unused-vars
   onStepChange?: (step: number) => void;
   // eslint-disable-next-line no-unused-vars
@@ -32,7 +29,6 @@ const MultistepForm = <T,>({
   onSubmit,
   children,
   render,
-  swipeableViewsProps,
   onStepChange,
 }: PropsWithChildren<MultistepFormProps<T>>) => {
   const [step, setStep] = useState(0);
@@ -65,17 +61,18 @@ const MultistepForm = <T,>({
   }, [errors]);
 
   const renderProps: MultistepFormRenderProps = useMemo(() => {
-    const form = (
-      <SwipeableViews
-        disabled
-        index={step}
-        slideStyle={{ padding: '8px' }}
-        style={{ margin: '-8px' }}
-        {...swipeableViewsProps}
-      >
-        {children}
-      </SwipeableViews>
-    );
+    const form = React.Children.toArray(children)[step];
+    // (
+    //   <SwipeableViews
+    //     disabled
+    //     index={step}
+    //     slideStyle={{ padding: '8px' }}
+    //     style={{ margin: '-8px' }}
+    //     {...swipeableViewsProps}
+    //   >
+    //     {children}
+    //   </SwipeableViews>
+    // );
 
     /**
      * triggers form validation. If validation passes then the form will progress to the next step.
@@ -107,7 +104,7 @@ const MultistepForm = <T,>({
       goBack,
       methods,
     };
-  }, [step, methods, children, swipeableViewsProps, schema]);
+  }, [step, methods, children, schema]);
 
   return (
     <FormProvider {...methods}>
