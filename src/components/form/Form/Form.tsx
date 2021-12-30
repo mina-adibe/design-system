@@ -1,11 +1,12 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { PropsWithChildren, useEffect } from 'react';
 import { FormProvider, SubmitHandler, useForm, UseFormProps } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { ObjectSchema } from 'yup';
+import { AnyObjectSchema } from 'yup';
+import Lazy from 'yup/lib/Lazy';
 
 export interface FormProps<T extends Record<string, any> = {}> {
   onSubmit?: SubmitHandler<T>;
-  schema?: ObjectSchema<T>;
+  schema?: AnyObjectSchema | Lazy<any>;
   errors?: Record<keyof T, string>;
   defaultValues?: UseFormProps<T>['defaultValues'];
 }

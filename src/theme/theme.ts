@@ -109,6 +109,7 @@ let theme = createTheme({
     h1: {
       fontFamily: "'Raleway', sans-serif",
       fontWeight: 800,
+      fontSize: '5rem',
     },
     h2: {
       fontFamily: "'Raleway', sans-serif",
@@ -131,7 +132,7 @@ let theme = createTheme({
       fontWeight: 700,
     },
     button: {
-      fontWeight: 600,
+      fontWeight: 500,
       textTransform: 'none',
     },
   },
