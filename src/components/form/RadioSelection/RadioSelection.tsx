@@ -16,7 +16,10 @@ export interface RadioSelectionProps {
 }
 
 const RadioSelection: React.FC<RadioSelectionProps> = ({ name, label, options }) => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors, isSubmitting },
+  } = useFormContext();
 
   return (
     <Controller
@@ -24,7 +27,7 @@ const RadioSelection: React.FC<RadioSelectionProps> = ({ name, label, options })
       control={control}
       defaultValue={options[0]?.value}
       render={({ field }) => (
-        <FormFieldWrapper label={label}>
+        <FormFieldWrapper label={label} disabled={isSubmitting} errorObject={errors[name]}>
           <RadioGroup {...field}>
             {options.map((option) => (
               <FormControlLabel key={option.value} {...option} control={<Radio />} />

@@ -37,7 +37,7 @@ const Search = <T extends { label: string }>({
   const searchTimeout = useRef<number>();
 
   const {
-    formState: { errors },
+    formState: { errors, isSubmitting },
     control,
   } = useFormContext();
 
@@ -66,6 +66,7 @@ const Search = <T extends { label: string }>({
             noOptionsText={inputValue ? 'No results' : 'Type to search'}
             filterOptions={(x) => x}
             blurOnSelect
+            disabled={isSubmitting}
             getOptionLabel={(option) => option.label}
             isOptionEqualToValue={(o, v) => o.label === v.label}
             value={value === undefined ? null : value}

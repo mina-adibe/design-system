@@ -29,14 +29,14 @@ const TextField: React.FC<TextFieldProps> = ({
 }: PropsWithChildren<TextFieldProps>) => {
   const {
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useFormContext();
 
   return (
     <FormFieldWrapper
       label={label}
       errorObject={errors[name]}
-      disabled={disabled}
+      disabled={disabled || isSubmitting}
       required={required}
     >
       <OutlinedInput

@@ -48,7 +48,9 @@ export const Default: Story = () => (
 
 export const Paragraph: Story = () => (
   <Container>
-    <Typography variant='h3'>Heading 1</Typography>
+    <Typography variant='h4' gutterBottom>
+      Heading 1
+    </Typography>
     <Typography>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed sagittis ligula. Etiam
       vestibulum dui eros, nec dictum ante ornare feugiat. In hac habitasse platea dictumst. Morbi

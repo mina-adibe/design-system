@@ -1,4 +1,5 @@
 export * from './form';
+export * from './icons';
 
 export { default as AspectImage } from './AspectImage/AspectImage';
 export { default as ReservedBanner } from './ReservedBanner/ReservedBanner';

@@ -63,9 +63,11 @@ declare module '@mui/material/styles' {
 let theme = createTheme({
   palette: {
     primary: {
-      main: '#25C1B9',
+      main: '#20A598',
+      light: '#A9D4D0',
+      dark: '#157A70',
       contrastText: '#FFF',
-      alt: '#4DC9FF',
+      alt: '#6BDDCA',
     },
     secondary: {
       main: '#29302F',
@@ -162,6 +164,23 @@ theme = createTheme(theme, {
 theme = createTheme(theme, {
   components: {
     MuiButton: {
+      styleOverrides: {
+        root: {
+          fontWeight: 600,
+        },
+        sizeSmall: {
+          fontWeight: 500,
+        },
+        sizeMedium: {
+          padding: `${theme.spacing(1.25)} ${theme.spacing(2)}`,
+        },
+        sizeLarge: {
+          padding: `${theme.spacing(1.5)} ${theme.spacing(3)}`,
+        },
+        containedPrimary: {
+          background: `linear-gradient(-22.5deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.alt} 100%)`,
+        },
+      },
       defaultProps: {
         disableElevation: true,
         color: 'secondary',
