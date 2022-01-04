@@ -12,6 +12,7 @@ export { default as RadioSelection } from './RadioSelection/RadioSelection';
 export { default as TextField } from './TextField/TextField';
 export { default as AreaSearch } from './AreaSearch/AreaSearch';
 export { default as MultistepForm } from './MultistepForm/MultistepForm';
+export { default as FormStep } from './MultistepForm/FormStep';
 export { default as Search } from './Search/Search';
 
 export type { CalendarPickerProps } from './CalendarPicker/CalendarPicker';
@@ -28,4 +29,5 @@ export type { RadioSelectionProps } from './RadioSelection/RadioSelection';
 export type { TextFieldProps } from './TextField/TextField';
 export type { AreaSearchProps, AreaSearchOption } from './AreaSearch/AreaSearch';
 export type { MultistepFormProps } from './MultistepForm/MultistepForm';
+export type { FormStepProps } from './MultistepForm/FormStep';
 export type { SearchProps } from './Search/Search';
