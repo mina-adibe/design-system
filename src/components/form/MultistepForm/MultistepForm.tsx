@@ -1,12 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import React, { PropsWithChildren, ReactNode, useEffect, useMemo, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm, UseFormReturn } from 'react-hook-form';
-import { object, ObjectSchema } from 'yup';
+import { object } from 'yup';
 import { MultiStepFormContext, MultiStepFormContextState } from './MultiStepFormContext';
 
 export interface MultistepFormProps<T extends Record<string, any> = {}> {
   onSubmit?: SubmitHandler<T>;
-  schema?: Array<Record<string, any>>;
   errors?: Record<keyof T, string>;
   // eslint-disable-next-line no-unused-vars
   onStepChange?: (step: number) => void;
@@ -25,7 +24,6 @@ interface MultistepFormRenderProps<T = any> {
 }
 
 const MultistepForm = <T,>({
-  schema = [],
   errors,
   onSubmit,
   children,
@@ -34,6 +32,7 @@ const MultistepForm = <T,>({
 }: PropsWithChildren<MultistepFormProps<T>>) => {
   const [step, setStep] = useState(0);
   const [numSteps, setNumSteps] = useState(0);
+  const [schemas, setSchemas] = useState<{ [key: number]: Record<any, any> }>({});
 
   useEffect(() => {
     if (onStepChange) {
@@ -42,12 +41,9 @@ const MultistepForm = <T,>({
   }, [step]);
 
   const builtSchema = useMemo(() => {
-    const s = schema
-      .slice(0, step + 1)
-      .reduce((obj, item) => ({ ...obj, ...item }), {} as Record<keyof T, ObjectSchema<any>>);
-
-    return object().shape(s);
-  }, [step]);
+    const schemaObject = object().shape(schemas[step]);
+    return schemaObject;
+  }, [schemas, step]);
 
   const methods = useForm({
     resolver: builtSchema ? yupResolver(builtSchema) : undefined,
@@ -71,8 +67,8 @@ const MultistepForm = <T,>({
     const goForward = async () => {
       const res = await methods.trigger();
       if (res) {
-        if (step < schema.length) {
-          if (onSubmit && step === schema.length - 1) {
+        if (step < numSteps) {
+          if (onSubmit && step === numSteps - 1) {
             methods.handleSubmit(onSubmit)();
           }
           setStep((s) => s + 1);
@@ -90,17 +86,22 @@ const MultistepForm = <T,>({
       form,
       step,
       numSteps,
-      isConfirmationPage: step > schema.length - 1,
+      isConfirmationPage: step > numSteps - 1,
       goForward,
       goBack,
       methods,
     };
-  }, [step, numSteps, methods, children, schema]);
+  }, [step, numSteps, methods, children]);
 
   const ctx = useMemo<MultiStepFormContextState>(
     () => ({
       step,
-      register: () => setNumSteps((s) => s + 1),
+      register: (stepSchema) => {
+        setNumSteps((s) => {
+          if (stepSchema) setSchemas((sch) => ({ ...sch, [s]: stepSchema }));
+          return s + 1;
+        });
+      },
     }),
     [step]
   );

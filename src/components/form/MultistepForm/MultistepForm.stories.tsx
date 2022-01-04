@@ -28,7 +28,6 @@ const handleSubmit = (v: any) => {
 const Template: Story<MultistepFormStoryProps> = () => (
   <MultistepForm
     onSubmit={handleSubmit}
-    schema={schemas}
     render={({ form, goForward, goBack, step, numSteps, isConfirmationPage }) => (
       <Card>
         <CardContent>
@@ -48,12 +47,12 @@ const Template: Story<MultistepFormStoryProps> = () => (
       </Card>
     )}
   >
-    <FormStep step={0}>
+    <FormStep step={0} schema={schemas[0]}>
       <Stack spacing={2}>
         <TextField name='a' label='Value A' />
       </Stack>
     </FormStep>
-    <FormStep step={1}>
+    <FormStep step={1} schema={schemas[1]}>
       <Stack spacing={2}>
         <TextField name='b' label='Value B' />
         <TextField name='c' label='Value C' />
