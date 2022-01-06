@@ -31,3 +31,10 @@ Default.args = {
   label: 'Move-in Date',
   name: 'moveInDate',
 };
+
+export const MonthAndYear = Template.bind({});
+Default.args = {
+  label: 'Move-in Date',
+  name: 'moveInDate',
+  views: ['month', 'year'],
+};

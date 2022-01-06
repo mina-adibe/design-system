@@ -4,12 +4,13 @@ import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import FormFieldWrapper from '../FormFieldWrapper/FormFieldWrapper';
 
-export interface DatePickerProps extends MuiDatePickerProps {
+export interface DatePickerProps
+  extends Omit<MuiDatePickerProps, 'onChange' | 'value' | 'renderInput'> {
   name: string;
   label?: string;
 }
 
-const DatePicker: React.FC<DatePickerProps> = ({ name, label }) => {
+const DatePicker: React.FC<DatePickerProps> = ({ name, label, ...rest }) => {
   const {
     control,
     formState: { errors },
@@ -25,6 +26,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ name, label }) => {
             value={value || null}
             onChange={(date) => onChange(date || undefined)}
             {...field}
+            {...rest}
             renderInput={({ inputRef, inputProps, InputProps }) => (
               <OutlinedInput ref={inputRef} inputProps={inputProps} {...InputProps} />
             )}
