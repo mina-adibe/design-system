@@ -1,4 +1,4 @@
-import { LocalizationProvider } from '@mui/lab';
+import { LocalizationProvider, MonthPicker } from '@mui/lab';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import { Meta, Story } from '@storybook/react';
 import locale from 'date-fns/locale/en-NZ';
@@ -38,3 +38,16 @@ Default.args = {
   name: 'moveInDate',
   views: ['month', 'year'],
 };
+
+export const Month: Story<DatePickerProps> = () => (
+  <LocalizationProvider dateAdapter={DateAdapter} locale={locale}>
+    <Form>
+      <MonthPicker
+        date={new Date()}
+        minDate={new Date('2020-01-01T00:00:00.000')}
+        maxDate={new Date('2034-01-01T00:00:00.000')}
+        onChange={() => {}}
+      />
+    </Form>
+  </LocalizationProvider>
+);

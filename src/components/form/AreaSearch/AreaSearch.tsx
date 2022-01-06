@@ -1,36 +1,35 @@
-import Room from '@mui/icons-material/Room';
-import { AutocompleteProps } from '@mui/material';
 import { GoogleAPI, GoogleApiWrapper } from 'google-maps-react';
-import React, { useMemo } from 'react';
-import Search from '../Search/Search';
+import React, { useMemo, useState } from 'react';
 
-export interface AreaSearchProps
-  extends Omit<
-    AutocompleteProps<AreaSearchOption, false, false, false>,
-    'options' | 'renderInput' | 'ref'
-  > {
-  label?: string;
+export interface AreaSearchProps {
   google: GoogleAPI;
-  name: string;
-  /**
-   * Specifies how long the field should wait before it makes a request to the server
-   */
-  searchDelay?: number;
+
+  // eslint-disable-next-line no-unused-vars
+  children: (props: RenderFnProps) => React.ReactElement;
 }
 export interface AreaSearchOption {
-  label: string;
   id: string;
-  name: string;
+  mainText: string;
+  secondaryText: string;
+  description: string;
+  types: string[];
 }
 
-const AreaSearch = ({ google, ...rest }: AreaSearchProps) => {
+interface RenderFnProps {
+  results: AreaSearchOption[];
+  // eslint-disable-next-line no-unused-vars
+  search: (query: string) => Promise<void>;
+}
+
+const AreaSearch = ({ google, children }: AreaSearchProps) => {
+  const [results, setResults] = useState<AreaSearchOption[]>([]);
   const placeService = useMemo(() => new google.maps.places.AutocompleteService(), []);
   const session = useMemo(() => new google.maps.places.AutocompleteSessionToken(), []);
 
   const loc = useMemo(() => new google.maps.LatLng({ lat: -33.8688, lng: 151.2195 }), []);
 
   const searchFn = async (inputValue: string) => {
-    const results = await placeService.getPlacePredictions({
+    const searchResults = await placeService.getPlacePredictions({
       componentRestrictions: { country: 'au' },
       location: loc,
       radius: 100,
@@ -39,13 +38,17 @@ const AreaSearch = ({ google, ...rest }: AreaSearchProps) => {
       types: ['(cities)'],
     });
 
-    return results.predictions.map((p) => ({
-      label: `${p.structured_formatting.main_text}, ${p.structured_formatting.secondary_text}`,
+    const mappedResults = searchResults.predictions.map((p) => ({
       id: p.place_id,
-      name: p.structured_formatting.main_text,
+      mainText: p.structured_formatting.main_text,
+      secondaryText: p.structured_formatting.secondary_text,
+      description: p.description,
+      types: p.types,
     }));
+
+    setResults(mappedResults);
   };
-  return <Search searchFn={searchFn} startAdornment={<Room />} {...rest} />;
+  return children({ results, search: searchFn });
 };
 
 export default GoogleApiWrapper({

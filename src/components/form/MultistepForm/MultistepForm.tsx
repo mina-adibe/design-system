@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import React, { PropsWithChildren, ReactNode, useEffect, useMemo, useState } from 'react';
-import { FormProvider, SubmitHandler, useForm, UseFormReturn } from 'react-hook-form';
+import { ReactElement, ReactNode, useEffect, useMemo, useState } from 'react';
+import { FormProvider, SubmitHandler, useForm, UseFormReturn, UseFormProps } from 'react-hook-form';
 import { object } from 'yup';
 import { MultiStepFormContext, MultiStepFormContextState } from './MultiStepFormContext';
 
@@ -11,6 +11,9 @@ export interface MultistepFormProps<T extends Record<string, any> = {}> {
   onStepChange?: (step: number) => void;
   // eslint-disable-next-line no-unused-vars
   render: (props: MultistepFormRenderProps<T>) => ReactNode;
+  defaultValues?: UseFormProps<T>['defaultValues'];
+  // eslint-disable-next-line no-unused-vars
+  children: (props: MultistepFormChildrenRenderProps) => ReactElement;
 }
 
 interface MultistepFormRenderProps<T = any> {
@@ -23,13 +26,20 @@ interface MultistepFormRenderProps<T = any> {
   methods: UseFormReturn<T>;
 }
 
+interface MultistepFormChildrenRenderProps<T = any> {
+  goForward: () => void;
+  goBack: () => void;
+  methods: UseFormReturn<T>;
+}
+
 const MultistepForm = <T,>({
   errors,
   onSubmit,
   children,
   render,
   onStepChange,
-}: PropsWithChildren<MultistepFormProps<T>>) => {
+  defaultValues,
+}: MultistepFormProps<T>) => {
   const [step, setStep] = useState(0);
   const [numSteps, setNumSteps] = useState(0);
   const [schemas, setSchemas] = useState<{ [key: number]: Record<any, any> }>({});
@@ -47,6 +57,7 @@ const MultistepForm = <T,>({
 
   const methods = useForm({
     resolver: builtSchema ? yupResolver(builtSchema) : undefined,
+    defaultValues,
   });
 
   useEffect(() => {
@@ -59,8 +70,6 @@ const MultistepForm = <T,>({
   }, [errors]);
 
   const renderProps: MultistepFormRenderProps = useMemo(() => {
-    const form = children;
-
     /**
      * triggers form validation. If validation passes then the form will progress to the next step.
      */
@@ -83,7 +92,7 @@ const MultistepForm = <T,>({
     };
 
     return {
-      form,
+      form: children({ goBack, goForward, methods }),
       step,
       numSteps,
       isConfirmationPage: step > numSteps - 1,
