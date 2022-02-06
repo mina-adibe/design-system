@@ -9,13 +9,11 @@ module.exports = {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
     },
+    react: {
+      version: 'detect',
+    },
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-    'prettier/prettier',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['plugin:react/recommended', 'prettier/prettier', 'plugin:prettier/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -38,7 +36,6 @@ module.exports = {
       },
     ],
     'import/extensions': 0,
-    'import/no-unresolved': 0,
     'react/jsx-props-no-spreading': 0,
     'react/require-default-props': 0,
     'react/prop-types': 0,

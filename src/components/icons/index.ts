@@ -1,5 +1,7 @@
 export { default as GoogleIcon } from './Google';
 export { default as EasyRentIcon } from './EasyRent';
+export { default as EasyRentLogoIcon } from './EasyRentLogo';
+export { default as InstagramIcon } from './Instagram';
 
 export { default as BrowseIconTwoTone } from './twoTone/Browse';
 export { default as ContractIconTwoTone } from './twoTone/Contract';

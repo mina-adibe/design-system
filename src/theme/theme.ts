@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { pickersDayClasses } from '@mui/lab';
 import { checkboxClasses, outlinedInputClasses, radioClasses } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';

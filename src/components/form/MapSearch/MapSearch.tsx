@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { LoadingButton } from '@mui/lab';
@@ -63,6 +62,7 @@ const MapSearch: React.FC<MapSearchProps> = ({
     () =>
       listings.map((l) => (
         <Marker
+          key={l.id}
           position={{ lat: l.lat, lng: l.lng }}
           onClick={() => onSelectedListingChange(l.id)}
         />

@@ -60,7 +60,7 @@ const PhotoGrid: React.FC<PhotoGridProps> = ({
   return (
     <Grid spacing={2} item container>
       {value.map((p, i) => (
-        <PhotoContainer item key={p} xs={12} sm={6} md={4} xl={3}>
+        <PhotoContainer item key={p} xs={12}>
           <AspectImage src={p} srcSet={p} loading='lazy' alt='upload' rounded>
             {i === 0 && <OverlayChip label='Cover Image' color='secondary' size='small' />}
             {!readOnly && (
@@ -91,7 +91,7 @@ const PhotoGrid: React.FC<PhotoGridProps> = ({
       ))}
       {loadingImages > 0 &&
         Array.from({ length: loadingImages }).map((v) => (
-          <PhotoContainer item key={v as any} xs={12} sm={6} md={4} xl={3}>
+          <PhotoContainer item key={v as any} xs={12}>
             <AspectImage rounded />
           </PhotoContainer>
         ))}

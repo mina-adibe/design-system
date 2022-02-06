@@ -4,6 +4,7 @@ import {
   BrowseIconTwoTone,
   ContractIconTwoTone,
   EasyRentIcon,
+  EasyRentLogoIcon,
   GoogleIcon,
   MessagingIconTwoTone,
   PaymentIconTwoTone,
@@ -34,6 +35,7 @@ export const Gallery: Story<SvgIconProps> = (args) => (
     <GoogleIcon {...args} />
     <InstagramIcon {...args} />
     <EasyRentIcon {...args} />
+    <EasyRentLogoIcon {...args} />
   </Box>
 );
 
@@ -61,3 +63,4 @@ TwoTone.args = {
 export const Google: Story<SvgIconProps> = (args) => <GoogleIcon {...args} />;
 export const Instagram: Story<SvgIconProps> = (args) => <InstagramIcon {...args} />;
 export const EasyRent: Story<SvgIconProps> = (args) => <EasyRentIcon {...args} />;
+export const EasyRentLogo: Story<SvgIconProps> = (args) => <EasyRentLogoIcon {...args} />;

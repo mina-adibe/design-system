@@ -11,10 +11,14 @@ const readFileAsync = (file: Blob): Promise<string> =>
     reader.readAsDataURL(file);
   });
 
-const defaultUploadHandler = async (files: File[]) => {
-  const urls = await Promise.all(files.map(async (f) => readFileAsync(f)));
+const defaultUploadHandler = async (files: File[]): Promise<string[]> => {
+  return new Promise((res) => {
+    window.setTimeout(async () => {
+      const urls = await Promise.all(files.map(async (f) => readFileAsync(f)));
 
-  return urls;
+      res(urls);
+    }, 1000);
+  });
 };
 
 export default defaultUploadHandler;

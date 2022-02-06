@@ -20,7 +20,6 @@ export interface DropzoneProps {
    */
   multiple?: boolean;
   disabled?: boolean;
-  // eslint-disable-next-line no-unused-vars
   onUpload?: (files: File[]) => void;
 }
 

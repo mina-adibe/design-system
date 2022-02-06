@@ -3,8 +3,6 @@ import React, { useMemo, useState } from 'react';
 
 export interface AreaSearchProps {
   google: GoogleAPI;
-
-  // eslint-disable-next-line no-unused-vars
   children: (props: RenderFnProps) => React.ReactElement;
 }
 export interface AreaSearchOption {
@@ -17,7 +15,6 @@ export interface AreaSearchOption {
 
 interface RenderFnProps {
   results: AreaSearchOption[];
-  // eslint-disable-next-line no-unused-vars
   search: (query: string) => Promise<void>;
 }
 
