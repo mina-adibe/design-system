@@ -15,6 +15,7 @@ export { default as MultistepForm } from './MultistepForm/MultistepForm';
 export { default as FormStep } from './MultistepForm/FormStep';
 export { default as Search } from './Search/Search';
 export { default as FileUpload } from './FileUpload/FileUpload';
+export { default as SubmitButton } from './SubmitButton/SubmitButton';
 
 export type { CalendarPickerProps } from './CalendarPicker/CalendarPicker';
 export type { CheckboxProps } from './Checkbox/Checkbox';
@@ -33,3 +34,4 @@ export type { MultistepFormProps } from './MultistepForm/MultistepForm';
 export type { FormStepProps } from './MultistepForm/FormStep';
 export type { SearchProps } from './Search/Search';
 export type { FileUploadProps } from './FileUpload/FileUpload';
+export type { SubmitButtonProps } from './SubmitButton/SubmitButton';
