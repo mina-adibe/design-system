@@ -36,9 +36,15 @@ const FileUpload = <T extends boolean = false>({
   const openFileDialog = (setValue: (value: string[] | string) => void) => () => {
     const input = document.createElement('input');
     input.type = 'file';
-    input.multiple = multiple || false;
-    input.accept = accept || '';
-    input.capture = capture || '';
+    if (multiple) {
+      input.multiple = multiple;
+    }
+    if (accept) {
+      input.accept = accept;
+    }
+    if (capture) {
+      input.capture = capture;
+    }
     input.onchange = async (e) => {
       setIsUploading(true);
       const files = Array.from((e as any).target.files) as File[];
