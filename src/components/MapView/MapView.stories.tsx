@@ -13,7 +13,7 @@ const Template: Story<MapSearchStoryProps> = (args) => {
   return (
     <Stack>
       <Box sx={{ width: 600, height: 400, position: 'relative' }}>
-        <MapView {...args} />
+        <MapView {...args} apiKey={'AIzaSyD4ecsun_itWQdd-KVPEuuZjXCKET21mUQ'} />
       </Box>
     </Stack>
   );

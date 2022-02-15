@@ -1,4 +1,4 @@
-import { GoogleAPI, GoogleApiWrapper } from 'google-maps-react';
+import { GoogleAPI, GoogleApiWrapper, IProvidedProps } from 'google-maps-react';
 import React, { useMemo, useState } from 'react';
 
 export interface AreaSearchProps {
@@ -18,7 +18,7 @@ interface RenderFnProps {
   search: (query: string) => Promise<void>;
 }
 
-const AreaSearch = ({ google, children }: AreaSearchProps) => {
+const AreaSearchComponent = ({ google, children }: AreaSearchProps) => {
   const [results, setResults] = useState<AreaSearchOption[]>([]);
   const placeService = useMemo(() => new google.maps.places.AutocompleteService(), []);
   const session = useMemo(() => new google.maps.places.AutocompleteSessionToken(), []);
@@ -48,6 +48,12 @@ const AreaSearch = ({ google, children }: AreaSearchProps) => {
   return children({ results, search: searchFn });
 };
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyD4ecsun_itWQdd-KVPEuuZjXCKET21mUQ',
-})(AreaSearch);
+const AreaSearch = ({ apiKey, ...rest }: { apiKey: string } & Omit<AreaSearchProps, 'google'>) => {
+  const WrappedSearch = GoogleApiWrapper({
+    apiKey,
+  })(AreaSearchComponent);
+
+  return <WrappedSearch {...rest} />;
+};
+
+export default AreaSearch;

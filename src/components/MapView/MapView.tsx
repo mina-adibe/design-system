@@ -10,7 +10,12 @@ export interface MapViewProps extends IProvidedProps, IMapProps {
 /**
  * Displays google maps using custom styles
  */
-const MapView: React.FC<MapViewProps> = ({ children, google, onAreaChange, ...mapProps }) => {
+const MapViewComponent: React.FC<MapViewProps> = ({
+  children,
+  google,
+  onAreaChange,
+  ...mapProps
+}) => {
   const nav = useRef(new google.maps.Geocoder());
 
   const handleMove = async (_?: IMapProps, map?: any) => {
@@ -36,6 +41,12 @@ const MapView: React.FC<MapViewProps> = ({ children, google, onAreaChange, ...ma
   );
 };
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyD4ecsun_itWQdd-KVPEuuZjXCKET21mUQ',
-})(MapView);
+const MapView = ({ apiKey, ...rest }: { apiKey: string } & Omit<MapViewProps, 'google'>) => {
+  const WrappedMapView = GoogleApiWrapper({
+    apiKey,
+  })(MapViewComponent);
+
+  return <WrappedMapView {...rest} />;
+};
+
+export default MapView;

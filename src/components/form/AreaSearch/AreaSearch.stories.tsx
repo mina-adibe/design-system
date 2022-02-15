@@ -31,7 +31,7 @@ const Template: Story<AreaSearchProps> = () => {
     <LocalizationProvider dateAdapter={DateAdapter} locale={locale}>
       <Form onSubmit={onSubmit}>
         <Stack sx={{ width: '300px' }} spacing={2}>
-          <AreaSearch>
+          <AreaSearch apiKey={'AIzaSyD4ecsun_itWQdd-KVPEuuZjXCKET21mUQ'}>
             {({ results, search }) => (
               <>
                 <TextField onChange={(e) => search(e.target.value)} />
