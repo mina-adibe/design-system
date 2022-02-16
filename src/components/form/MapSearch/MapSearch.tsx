@@ -19,6 +19,7 @@ export interface MapSearchProps {
   onChange: (pos: { lat: number; lng: number }, zoom: number) => Promise<void>;
   listings: ListingPin[];
   onSelectedListingChange: (id: string) => void;
+  apiKey: string;
 }
 
 const ZoomButton = styled(Button)({
@@ -43,6 +44,7 @@ const MapSearch: React.FC<MapSearchProps> = ({
   onChange,
   listings = [],
   onSelectedListingChange,
+  apiKey,
 }) => {
   const [zoom, setZoom] = useState(13);
   const [pos, setPos] = useState(cities.auckland);
@@ -74,6 +76,7 @@ const MapSearch: React.FC<MapSearchProps> = ({
     <>
       <Box sx={{ position: 'relative', width: '100%', height: '100%' }}>
         <MapView
+          apiKey={apiKey}
           zoom={zoom}
           scrollwheel
           initialCenter={pos}
@@ -88,9 +91,7 @@ const MapSearch: React.FC<MapSearchProps> = ({
             const c = m?.getCenter();
             if (c) setPos(c as any);
           }}
-        >
-          {markers}
-        </MapView>
+        />
         <ButtonGroup
           sx={{
             position: 'absolute',
