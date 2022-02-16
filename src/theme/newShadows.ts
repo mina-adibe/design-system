@@ -64,11 +64,13 @@ let n = 24;
 //   },
 // };
 
+const color = [12, 24, 24];
+
 const createShadow = (...px: number[]) => {
   return [
-    `${px[0]}px ${px[1]}px ${px[2]}px rgba(243, 243, 243, ${px[3]})`,
-    `${px[4]}px ${px[5]}px ${px[6]}px rgba(24, 24, 43, ${px[7]})`,
-    `${px[8]}px ${px[9]}px ${px[10]}px rgba(0, 0, 0, ${px[11]})`,
+    `${px[0]}px ${px[1]}px ${px[2]}px rgba(${color.join(', ')}, ${px[3]})`,
+    `${px[4]}px ${px[5]}px ${px[6]}px rgba(${color.join(', ')}, ${px[7]})`,
+    `${px[8]}px ${px[9]}px ${px[10]}px rgba(${color.join(', ')}, ${px[11]})`,
   ].join(',');
 };
 
@@ -81,36 +83,37 @@ export const generate = () => {
     } else {
       let j = (i - 1) / (n - 1);
 
-      const opacityMultiplier = 0.25;
+      const opacityMultiplier = 0.4;
+      const baseOpacity = 0.03;
 
-      const opacity1 = +(0.45 - j * opacityMultiplier).toFixed(4);
-      const opacity2 = +(0.01 + j * opacityMultiplier).toFixed(4);
-      const opacity3 = +(0.02 + j * opacityMultiplier).toFixed(4);
+      const opacity1 = +(baseOpacity + 0.03 - j * (opacityMultiplier + 0.1)).toFixed(1);
+      const opacity2 = +(baseOpacity + 0.0 + j * (opacityMultiplier + 0.05)).toFixed(1);
+      const opacity3 = +(baseOpacity + 0.01 + j * (opacityMultiplier + 0.03)).toFixed(1);
 
       const xOffset = 0;
 
       shadows.push(
         createShadow(
           xOffset,
-          +(5 + j * 2).toFixed(1),
-          +(15 + j * 8).toFixed(1),
+          +(10 + j * 2).toFixed(1),
+          +(25 + j * 8).toFixed(1),
           opacity1,
 
           xOffset,
           +(2 + j * 4).toFixed(1),
-          +(10 - j * 5).toFixed(1),
+          +(15 - j * 5).toFixed(1),
           opacity2,
 
           xOffset,
           +(2 + j * 0.25).toFixed(1),
-          +(16 + j * 8).toFixed(1),
+          +(20 + j * 8).toFixed(1),
           opacity3
         )
       );
     }
   }
 
-  console.log(shadows);
+  console.log(JSON.stringify(shadows));
 
   return shadows;
 };
