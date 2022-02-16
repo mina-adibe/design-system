@@ -83,7 +83,7 @@ export const generate = () => {
     } else {
       let j = (i - 1) / (n - 1);
 
-      const opacityMultiplier = 0.4;
+      const opacityMultiplier = 0.3;
       const baseOpacity = 0.03;
 
       const opacity1 = +(baseOpacity + 0.03 - j * (opacityMultiplier + 0.1)).toFixed(1);
@@ -96,17 +96,17 @@ export const generate = () => {
         createShadow(
           xOffset,
           +(10 + j * 2).toFixed(1),
-          +(25 + j * 8).toFixed(1),
+          +(20 + j * 8).toFixed(1),
           opacity1,
 
           xOffset,
           +(2 + j * 4).toFixed(1),
-          +(15 - j * 5).toFixed(1),
+          +(10 - j * 5).toFixed(1),
           opacity2,
 
           xOffset,
           +(2 + j * 0.25).toFixed(1),
-          +(20 + j * 8).toFixed(1),
+          +(15 + j * 8).toFixed(1),
           opacity3
         )
       );
