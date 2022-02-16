@@ -166,6 +166,9 @@ let theme = createTheme({
       fontWeight: 500,
       textTransform: 'none',
     },
+    subtitle2: {
+      fontWeight: 600,
+    },
   },
 });
 
