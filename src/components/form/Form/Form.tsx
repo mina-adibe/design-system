@@ -1,12 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { PropsWithChildren, useEffect } from 'react';
 import { FormProvider, SubmitHandler, useForm, UseFormProps } from 'react-hook-form';
-import { AnyObjectSchema } from 'yup';
+import { AnyObjectSchema, object } from 'yup';
 import Lazy from 'yup/lib/Lazy';
 
 export interface FormProps<T extends Record<string, any> = {}> {
   onSubmit?: SubmitHandler<T>;
-  schema?: AnyObjectSchema | Lazy<any>;
+  schema?: Record<string, any>;
   errors?: Record<keyof T, string>;
   defaultValues?: UseFormProps<T>['defaultValues'];
 }
@@ -19,7 +19,7 @@ const Form = <T,>({
   defaultValues,
 }: PropsWithChildren<FormProps<T>>) => {
   const methods = useForm({
-    resolver: schema ? yupResolver(schema) : undefined,
+    resolver: schema ? yupResolver(object().shape(schema)) : undefined,
     defaultValues,
   });
 
