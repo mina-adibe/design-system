@@ -4,7 +4,7 @@ import {
   CheckboxProps as MuiCheckboxProps,
   FormControlLabel,
 } from '@mui/material';
-import { useFormContext } from 'react-hook-form';
+import { Controller, useFormContext } from 'react-hook-form';
 import FormFieldWrapper from '../FormFieldWrapper/FormFieldWrapper';
 
 export interface CheckboxProps extends MuiCheckboxProps {
@@ -14,13 +14,28 @@ export interface CheckboxProps extends MuiCheckboxProps {
 
 const Checkbox = ({ label, name }: CheckboxProps) => {
   const {
-    register,
+    control,
     formState: { errors },
   } = useFormContext();
 
   return (
     <FormFieldWrapper errorObject={errors[name]}>
-      <FormControlLabel {...register(name)} control={<MuiCheckbox />} label={label} />
+      <FormControlLabel
+        control={
+          <Controller
+            name={name}
+            control={control}
+            render={({ field }) => (
+              <MuiCheckbox
+                {...field}
+                checked={field.value}
+                onChange={(e) => field.onChange(e.target.checked)}
+              />
+            )}
+          />
+        }
+        label={label}
+      />
     </FormFieldWrapper>
   );
 };

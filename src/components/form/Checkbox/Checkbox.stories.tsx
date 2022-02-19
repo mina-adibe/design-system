@@ -30,7 +30,6 @@ const ValuePrinter = () => {
 const Template: Story<CheckboxProps> = (args) => (
   <Form defaultValues={{ checkbox: true }}>
     <Checkbox {...args} />
-    <TextField name='test' />
     <ValuePrinter />
   </Form>
 );
