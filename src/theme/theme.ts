@@ -1,7 +1,6 @@
 import { pickersDayClasses } from '@mui/lab';
 import { checkboxClasses, outlinedInputClasses, radioClasses } from '@mui/material';
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
-import './fonts.css';
 
 declare module '@mui/material/styles' {
   interface PaletteColor {
