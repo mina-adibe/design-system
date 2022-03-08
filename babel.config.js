@@ -16,7 +16,15 @@
 //   ]
 // }
 
-const sharedPresets = ['@babel/typescript'];
+const sharedPresets = [
+  '@babel/typescript',
+  [
+    '@babel/preset-react',
+    {
+      runtime: 'automatic',
+    },
+  ],
+];
 const shared = {
   ignore: ['src/**/*.stories.ts'],
   presets: sharedPresets,
