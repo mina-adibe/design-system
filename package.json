@@ -1,12 +1,13 @@
 {
   "name": "@easyrent-nz/components",
-  "version": "0.13.10",
+  "version": "0.13.11",
   "description": "Design system with reusable react components",
   "license": "MIT",
   "main": "index.js",
   "module": "index.esm.js",
   "types": "index.d.ts",
   "author": "EasyRent",
+  "sideEffects": false,
   "devDependencies": {
     "@babel/core": "^7.15.0",
     "@date-io/date-fns": "^2.11.0",
