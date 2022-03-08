@@ -1,6 +1,6 @@
 {
   "name": "@easyrent-nz/components",
-  "version": "0.13.11",
+  "version": "0.13.12",
   "description": "Design system with reusable react components",
   "license": "MIT",
   "main": "index.js",
@@ -65,7 +65,8 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build": "rollup -c && node scripts/copy-pkg.js",
+    "build-rollup": "rollup -c && node scripts/copy-pkg.js",
+    "build": "tsc --project tsconfig.prod.json && node scripts/copy-pkg.js",
     "deploy-storybook": "storybook-to-ghpages",
     "clean": "rm -rf node_modules && yarn",
     "prepare": "husky install",
