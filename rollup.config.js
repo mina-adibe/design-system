@@ -3,24 +3,24 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from 'rollup-plugin-typescript2';
 import postcss from 'rollup-plugin-postcss';
-
-const packageJson = require('./package.json');
+import multiInput from 'rollup-plugin-multi-input';
 
 export default {
-  input: 'src/index.ts',
+  input: 'src/**/*',
   output: [
     {
-      file: `lib/*`,
       format: 'cjs',
       sourcemap: true,
+      dir: 'lib/cjs',
     },
     {
-      file: `lib/*`,
+      dir: 'lib',
       format: 'esm',
       sourcemap: true,
     },
   ],
   plugins: [
+    multiInput(),
     peerDepsExternal(),
     resolve(),
     commonjs(),
