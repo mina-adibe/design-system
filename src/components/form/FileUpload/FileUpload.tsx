@@ -35,6 +35,7 @@ const FileUpload = <T extends boolean = false>({
 
   const openFileDialog = (setValue: (value: string[] | string) => void) => () => {
     const input = document.createElement('input');
+    document.body.appendChild(input);
     input.type = 'file';
     if (multiple) {
       input.multiple = multiple;
@@ -53,6 +54,7 @@ const FileUpload = <T extends boolean = false>({
       setValue(multiple ? urls : urls[0]);
     };
     input.click();
+    document.body.removeChild(input);
   };
 
   return (
