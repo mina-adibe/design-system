@@ -46,15 +46,15 @@ const FileUpload = <T extends boolean = false>({
     if (capture) {
       input.capture = capture;
     }
-    input.onchange = async (e) => {
+    input.addEventListener('change', async (e) => {
       setIsUploading(true);
       const files = Array.from((e as any).target.files) as File[];
       const urls = await onUpload(files);
       setIsUploading(false);
       setValue(multiple ? urls : urls[0]);
-    };
+      document.body.removeChild(input);
+    });
     input.click();
-    document.body.removeChild(input);
   };
 
   return (
