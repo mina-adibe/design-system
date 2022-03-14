@@ -1,8 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { LocalizationProvider } from '@mui/lab';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import { PropsWithChildren, useEffect } from 'react';
 import { FormProvider, SubmitHandler, useForm, UseFormProps } from 'react-hook-form';
-import { AnyObjectSchema, object } from 'yup';
-import Lazy from 'yup/lib/Lazy';
+import { object } from 'yup';
 
 export interface FormProps<T extends Record<string, any> = {}> {
   onSubmit?: SubmitHandler<T>;
@@ -34,7 +35,9 @@ const Form = <T,>({
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={onSubmit && methods.handleSubmit(onSubmit)}>{children}</form>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <form onSubmit={onSubmit && methods.handleSubmit(onSubmit)}>{children}</form>
+      </LocalizationProvider>
     </FormProvider>
   );
 };

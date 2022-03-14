@@ -1,4 +1,7 @@
 {
   "extends": "./tsconfig",
-  "exclude": ["**/*.test.ts", "**/*.mock.ts", "**/*.stories.tsx"]
+  "exclude": ["**/*.test.ts", "**/*.mock.ts", "**/*.stories.tsx"],
+  "compilerOptions": {
+    "emitDeclarationOnly": true
+  }
 }

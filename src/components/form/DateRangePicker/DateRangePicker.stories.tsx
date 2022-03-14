@@ -1,14 +1,14 @@
-import { LocalizationProvider } from '@mui/lab';
+import { LocalizationProvider, MonthPicker } from '@mui/lab';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import { Meta, Story } from '@storybook/react';
 import locale from 'date-fns/locale/en-NZ';
 import { useFormContext } from 'react-hook-form';
 import Form from '../Form/Form';
-import CalendarPicker, { CalendarPickerProps } from './CalendarPicker';
+import DateRangePicker, { DateRangePickerProps } from './DateRangePicker';
 
 export default {
-  component: CalendarPicker,
-  title: 'Components/Form/Calendar Picker',
+  component: DateRangePicker,
+  title: 'Components/Form/Date Range Picker',
   argTypes: {
     label: {
       control: 'text',
@@ -29,16 +29,17 @@ const ValueRenderer = () => {
   );
 };
 
-const Template: Story<CalendarPickerProps> = ({ name, ...args }) => (
+const Template: Story<DateRangePickerProps> = ({ name, ...args }) => (
   <LocalizationProvider dateAdapter={DateAdapter} locale={locale}>
     <Form>
+      <DateRangePicker name={name} {...args} />
       <ValueRenderer />
-      <CalendarPicker name={name} {...args} />
     </Form>
   </LocalizationProvider>
 );
 
 export const Default = Template.bind({});
 Default.args = {
-  name: 'moveInDate',
+  label: 'Available Dates',
+  name: 'dates',
 };

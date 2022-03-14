@@ -33,29 +33,31 @@ const FileUpload = <T extends boolean = false>({
 
   const { control } = useFormContext();
 
-  const openFileDialog = (setValue: (value: string[] | string) => void) => () => {
-    const input = document.createElement('input');
-    document.body.appendChild(input);
-    input.type = 'file';
-    if (multiple) {
-      input.multiple = multiple;
-    }
-    if (accept) {
-      input.accept = accept;
-    }
-    if (capture) {
-      input.capture = capture;
-    }
-    input.addEventListener('change', async (e) => {
-      setIsUploading(true);
-      const files = Array.from((e as any).target.files) as File[];
-      const urls = await onUpload(files);
-      setIsUploading(false);
-      setValue(multiple ? urls : urls[0]);
-      document.body.removeChild(input);
-    });
-    input.click();
-  };
+  const openFileDialog =
+    (setValue: (value: string[] | string) => void, currentValue: string[] | undefined) => () => {
+      const input = document.createElement('input');
+      input.style.display = 'none';
+      document.body.appendChild(input);
+      input.type = 'file';
+      if (multiple) {
+        input.multiple = multiple;
+      }
+      if (accept) {
+        input.accept = accept;
+      }
+      if (capture) {
+        input.capture = capture;
+      }
+      input.addEventListener('change', async (e) => {
+        setIsUploading(true);
+        const files = Array.from((e as any).target.files) as File[];
+        const urls = await onUpload(files);
+        setIsUploading(false);
+        setValue(multiple ? [...(currentValue || []), ...urls] : urls[0]);
+        document.body.removeChild(input);
+      });
+      input.click();
+    };
 
   return (
     <Controller
@@ -64,7 +66,7 @@ const FileUpload = <T extends boolean = false>({
       render={({ field: { value, onChange } }) => (
         <>
           {children({
-            openFileDialog: openFileDialog(onChange),
+            openFileDialog: openFileDialog(onChange, value),
             isUploading,
             value,
             setValue: onChange,

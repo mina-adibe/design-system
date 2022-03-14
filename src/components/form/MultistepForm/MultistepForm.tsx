@@ -1,14 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { ReactElement, ReactNode, useEffect, useMemo, useState } from 'react';
+import { FormEvent, ReactElement, ReactNode, useEffect, useMemo, useState } from 'react';
 import { FormProvider, SubmitHandler, useForm, UseFormReturn, UseFormProps } from 'react-hook-form';
 import { object } from 'yup';
 import { MultiStepFormContext, MultiStepFormContextState } from './MultiStepFormContext';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { LocalizationProvider } from '@mui/lab';
 
 export interface MultistepFormProps<T extends Record<string, any> = {}> {
   onSubmit?: SubmitHandler<T>;
   errors?: Record<keyof T, string>;
   // eslint-disable-next-line no-unused-vars
-  onStepChange?: (step: number) => void;
+  onStepChange?: (step: number, values: Partial<T>) => void;
   // eslint-disable-next-line no-unused-vars
   render: (props: MultistepFormRenderProps<T>) => ReactNode;
   defaultValues?: UseFormProps<T>['defaultValues'];
@@ -46,7 +48,7 @@ const MultistepForm = <T,>({
 
   useEffect(() => {
     if (onStepChange) {
-      onStepChange(step);
+      onStepChange(step, methods.getValues() as Partial<T>);
     }
   }, [step]);
 
@@ -102,6 +104,12 @@ const MultistepForm = <T,>({
     };
   }, [step, numSteps, methods, children]);
 
+  const handleStepSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    renderProps.goForward();
+  };
+
   const ctx = useMemo<MultiStepFormContextState>(
     () => ({
       step,
@@ -117,9 +125,11 @@ const MultistepForm = <T,>({
 
   return (
     <FormProvider {...methods}>
-      <MultiStepFormContext.Provider value={ctx}>
-        <form>{render(renderProps)}</form>
-      </MultiStepFormContext.Provider>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <MultiStepFormContext.Provider value={ctx}>
+          <form onSubmit={handleStepSubmit}>{render(renderProps)}</form>
+        </MultiStepFormContext.Provider>
+      </LocalizationProvider>
     </FormProvider>
   );
 };
