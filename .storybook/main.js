@@ -1,4 +1,5 @@
 module.exports = {
+  babel: async (options) => ({ ...options, babelrc: false }),
   typescript: {
     check: false,
     checkOptions: {},

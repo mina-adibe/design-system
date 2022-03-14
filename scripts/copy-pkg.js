@@ -8,6 +8,11 @@ delete pkgData.scripts;
 // Delete devDependencies
 delete pkgData.devDependencies;
 
+// Set entry points
+pkgData.main = 'cjs/index.js';
+pkgData.module = 'index.js';
+pkgData.types = 'index.d.ts';
+
 // Remove any dependencies starting with "@storybook"
 Object.keys(pkgData.dependencies).forEach((key) => {
   if (key.startsWith('@storybook')) {

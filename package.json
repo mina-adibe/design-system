@@ -3,9 +3,9 @@
   "version": "0.15.0",
   "description": "Design system with reusable react components",
   "license": "MIT",
-  "main": "cjs/index.js",
-  "module": "index.js",
-  "types": "index.d.ts",
+  "main": "lib/cjs/index.js",
+  "module": "lib/index.js",
+  "types": "lib/index.d.ts",
   "author": "EasyRent",
   "sideEffects": false,
   "devDependencies": {
